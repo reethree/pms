@@ -115,4 +115,15 @@ class FeesController extends Controller
     {
         //
     }
+    
+    public function getDataOverheadByYear(Request $request)
+    {
+        $year = $request->year;
+        
+        $data['min'] = number_format(\DB::table('management_fees')->where('year', $year)->max('monthly_revenue'));
+        $data['max'] = number_format(\DB::table('management_fees')->where('year', $year)->min('monthly_revenue'));
+        $data['avg'] = number_format(\DB::table('management_fees')->where('year', $year)->avg('monthly_revenue'));
+        
+        return json_encode($data);
+    }
 }

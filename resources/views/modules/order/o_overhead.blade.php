@@ -31,7 +31,7 @@
                     <td>{{number_format($oo->min)}}</td>
                     <td>{{number_format($oo->avg)}}</td>
                     <td>{{number_format($oo->amount)}}</td>
-                    <td align="center"><b>{{number_format($oo->pcs)}}</b></td>
+                    <td align="center"><b>{{number_format($oo->amount_pcs)}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oo->id, 'overhead'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Year</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="electricity_year" name="year" style="width: 100%;">
+                                    <select class="form-control" id="overhead_year" name="year" style="width: 100%;">
                                         <option value="">Choose Year</option>
                                         <option value="2017">2017</option>
                                         <option value="2018">2018</option>
@@ -104,7 +104,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control" id="amount_electricity" placeholder="Amount" required>
+                                    <input type="text" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
                                     </div>
                                 </div>
                             </div>

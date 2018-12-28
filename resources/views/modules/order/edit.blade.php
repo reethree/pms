@@ -28,6 +28,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
+            <a href="{{ route('preview-order', $order->id) }}" class="btn btn-danger"><i class="fa fa-check"></i> Order Preview</a>
             <button type="submit" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Update</button>
         </div>
         <!-- /.box-footer -->
@@ -125,6 +126,28 @@
                 $('#max_bill').val(json.max_bill);
                 $('#min_bill').val(json.min_bill);
                 $('#avg_bill').val(json.avg_bill);
+            }
+        });
+    });
+    
+    $("#overhead_year").on("change", function(){
+        var year = $(this).val();
+        var url = '{{route("getDataOverheadByYear")}}';
+        $.ajax({
+            type: 'GET',
+            data: {'year' : year},
+            dataType : 'json',
+            url: url,
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Something went wrong, please try again later.');
+            },
+            success:function(json)
+            {      
+                console.log(json);
+                $('#overhead_max').val(json.max);
+                $('#overhead_min').val(json.min);
+                $('#overhead_avg').val(json.avg);
             }
         });
     });

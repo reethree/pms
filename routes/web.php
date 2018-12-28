@@ -133,6 +133,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'delete-fees',
             'uses' => 'FeesController@destroy'
         ]);
+        Route::get('/fees/getDataOverheadByYear', [
+            'as' => 'getDataOverheadByYear',
+            'uses' => 'FeesController@getDataOverheadByYear'
+        ]);
         
         // Machine Routes
         Route::get('/machine', [
@@ -356,6 +360,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/order/detail/delete/{detail_id}/{type}', [
             'as' => 'delete-order-detail',
             'uses' => 'OrderController@destroyDetail'
+        ]);
+        Route::get('/order/preview/{id}', [
+            'as' => 'preview-order',
+            'uses' => 'OrderController@preview'
         ]);
 
         // Product Routes

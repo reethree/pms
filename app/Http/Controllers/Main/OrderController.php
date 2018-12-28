@@ -29,7 +29,64 @@ class OrderController extends Controller
         
         return view('modules.order.index', $data);
     }
+    
+    public function preview($id)
+    {
+        $data['page_title'] = "Orders Preview";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => '',
+                'title' => 'Orders'
+            ],
+            [
+                'action' => '',
+                'title' => 'Preview'
+            ]
+        ]; 
+        
+        $order = \DB::table('orders')->find($id);
+        
+        $order_product = \DB::table('order_product')
+                ->select('order_product.*','products.name as product_name','products.weight_buff','products.efficiency_buffer')
+                ->leftjoin('products', 'order_product.product_id', '=', 'products.id')
+                ->where('order_id', $id)
+                ->get();
+        
+        foreach ($order_product as $op):
+            $data_machines = \DB::table('product_machine')
+                ->select('product_machine.*','machines.name as machine_name')
+                ->leftjoin('machines', 'product_machine.machine_id','=','machines.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $data_moulds = \DB::table('product_mould')
+                ->select('product_mould.*','mould.name as mould_name','mould.no_of_cavity as cavity')
+                ->leftjoin('mould', 'product_mould.mould_id','=','mould.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $op->machines = $data_machines;
+            $op->moulds = $data_moulds;
+        endforeach;
+        
+        $order_labour = \DB::table('order_labour')->where('order_id', $id)->get();
+        $order_electricity = \DB::table('order_electricity')->where('order_id', $id)->get();        
+        $order_packaging = \DB::table('order_packaging')->where('order_id', $id)->get();
+        $order_transport = \DB::table('order_transport')->where('order_id', $id)->get();
+        $order_overhead = \DB::table('order_overhead')->where('order_id', $id)->get();
 
+        $data['order'] = $order;     
+        $data['order_product'] = $order_product;
+        $data['order_labour'] = $order_labour;
+        $data['order_electricity'] = $order_electricity;
+        $data['order_packaging'] = $order_packaging;
+        $data['order_transport'] = $order_transport;
+        $data['order_overhead'] = $order_overhead;
+        
+        return view('modules.order.preview', $data);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -256,7 +313,10 @@ class OrderController extends Controller
             $data['max_bill'] = str_replace(',', '', $data['max_bill']);
             $data['min_bill'] = str_replace(',', '', $data['min_bill']);
             $data['avg_bill'] = str_replace(',', '', $data['avg_bill']);
-            $data['pcs'] = round($data['amount']/$sum_product_qty, 2);
+            
+            $pcs = (($data['amount']/25)/$data['total_machine'])*$data['days_needed'];
+            
+            $data['pcs'] = round($pcs/$sum_product_qty, 2);
             
             $insert_id = \DB::table('order_electricity')->insertGetId($data);  
             
@@ -267,8 +327,7 @@ class OrderController extends Controller
             $data['cost_pcs'] = round($data['cost']/$qty, 2);
             $data['amount_pcs'] = round($data['amount']/$qty, 2);
             
-            $insert_id = \DB::table('order_packaging')->insertGetId($data); 
-            
+            $insert_id = \DB::table('order_packaging')->insertGetId($data);           
         }elseif($type == 'transport'){
             $data['order_id'] = $order_id;
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
@@ -280,7 +339,9 @@ class OrderController extends Controller
         }elseif($type == 'overhead'){
             $data['order_id'] = $order_id;
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
-            
+            $data['max'] = str_replace(',', '', $data['max']);
+            $data['min'] = str_replace(',', '', $data['min']);
+            $data['avg'] = str_replace(',', '', $data['avg']);
             $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
             
             $insert_id = \DB::table('order_overhead')->insertGetId($data); 

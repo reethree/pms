@@ -15,8 +15,8 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Year</th>
-                  <th>Max Bill per Month</th>
-                  <th>Min Bill per Month</th>
+                  <th>Total Machine</th>
+                  <th>Days Needed</th>
                   <th>Average per Month</th>
                   <th>Amount</th>
                   <th>Electricity (Buffer)<br />per PCS</th>
@@ -27,8 +27,8 @@
                 <tr>
                     <td>{{$i}}</td>
                     <td>{{$oe->year}}</td>
-                    <td>{{number_format($oe->max_bill)}}</td>
-                    <td>{{number_format($oe->min_bill)}}</td>
+                    <td align="center">{{number_format($oe->total_machine)}}</td>
+                    <td align="center">{{number_format($oe->days_needed)}}</td>
                     <td>{{number_format($oe->avg_bill)}}</td>
                     <td>{{number_format($oe->amount)}}</td>
                     <td align="center"><b>{{number_format($oe->pcs)}}</b></td>
@@ -97,6 +97,18 @@
                                     <span class="input-group-addon">IDR</span>
                                     <input type="text" name="avg_bill" class="form-control" id="avg_bill" placeholder="Average Bill per Month" required readonly>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Total Machine</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="total_machine" class="form-control" placeholder="Total Machine" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Days Needed</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="days_needed" class="form-control" placeholder="Total Machine" required>
                                 </div>
                             </div>
                             <div class="form-group">
