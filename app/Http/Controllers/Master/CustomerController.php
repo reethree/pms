@@ -100,7 +100,22 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Customer";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-customer'),
+                'title' => 'Customer'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['customer'] = \DB::table('customer')->find($id);
+        
+        return view('modules.customer.edit', $data);
     }
 
     /**
@@ -112,7 +127,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('customer')->where('id',$id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Customer has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
@@ -123,6 +147,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('customer')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Customer has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
 }

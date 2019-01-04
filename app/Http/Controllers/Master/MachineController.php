@@ -90,7 +90,22 @@ class MachineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Machines";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-machine'),
+                'title' => 'Machines'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['machine'] = \DB::table('machines')->find($id);
+        
+        return view('modules.machine.edit', $data);
     }
 
     /**
@@ -102,7 +117,16 @@ class MachineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('machines')->where('id',$id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Machine has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
@@ -113,6 +137,10 @@ class MachineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('machines')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Machine has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
 }

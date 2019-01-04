@@ -90,7 +90,22 @@ class MouldController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Mould";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-mould'),
+                'title' => 'Mould'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['mould'] = \DB::table('mould')->find($id);
+        
+        return view('modules.mould.edit', $data);
     }
 
     /**
@@ -102,7 +117,16 @@ class MouldController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('mould')->where('id',$id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Mould has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
@@ -113,6 +137,10 @@ class MouldController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('mould')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Mould has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
 }

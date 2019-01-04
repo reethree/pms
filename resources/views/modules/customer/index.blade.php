@@ -45,7 +45,7 @@
                   <td align='center'>@if($customer->status == 'active')<span class="label label-success">Active</span>@else<span class="label label-danger">{{$customer->status}}</span>@endif</td>  
                   <td align='center'>
                       <a href="{{route('edit-customer', $customer->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                      <a href="{{route('delete-customer', $customer->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                      <a href="{{route('delete-customer', $customer->id)}}" onclick="if(!confirm('Are you sure want to delete?')){return false;}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
                   </td>
                 </tr>
                 <?php $i++;?>
