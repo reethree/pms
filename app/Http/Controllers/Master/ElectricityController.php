@@ -114,8 +114,8 @@ class ElectricityController extends Controller
             ]
         ]; 
         
-        $data['electricity'] = \DB::table('electricity')->first($id);
-        
+        $data['electricity'] = \DB::table('electricity')->find($id);
+
         return view('modules.electricity.edit', $data);
     }
 

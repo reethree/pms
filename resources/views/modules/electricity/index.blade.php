@@ -70,7 +70,7 @@
       </div>
       <!-- /.box -->
     </div>
-  </div>
+</div>
     
 @endsection
 

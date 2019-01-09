@@ -38,26 +38,26 @@
                         <div class="col-sm-4">
                             <select class="form-control" name="month" style="width: 100%;">
                                 <option value="">Choose Month</option>
-                                <option value="01" @if(date('m') == $electricity->month) selected @endif>January</option>
-                                <option value="02" @if(date('m') == $electricity->month) selected @endif>February</option>
-                                <option value="03" @if(date('m') == $electricity->month) selected @endif>March</option>
-                                <option value="04" @if(date('m') == $electricity->month) selected @endif>April</option>
-                                <option value="05" @if(date('m') == $electricity->month) selected @endif>May</option>
-                                <option value="06" @if(date('m') == $electricity->month) selected @endif>June</option>
-                                <option value="07" @if(date('m') == $electricity->month) selected @endif>July</option>
-                                <option value="08" @if(date('m') == $electricity->month) selected @endif>August</option>
-                                <option value="09" @if(date('m') == $electricity->month) selected @endif>September</option>
-                                <option value="10" @if(date('m') == $electricity->month) selected @endif>October</option>
-                                <option value="11" @if(date('m') == $electricity->month) selected @endif>November</option>
-                                <option value="12" @if(date('m') == $electricity->month) selected @endif>December</option>
+                                <option value="01" @if($electricity->month == '01') selected @endif>January</option>
+                                <option value="02" @if($electricity->month == '02') selected @endif>February</option>
+                                <option value="03" @if($electricity->month == '03') selected @endif>March</option>
+                                <option value="04" @if($electricity->month == '04') selected @endif>April</option>
+                                <option value="05" @if($electricity->month == '05') selected @endif>May</option>
+                                <option value="06" @if($electricity->month == '06') selected @endif>June</option>
+                                <option value="07" @if($electricity->month == '07') selected @endif>July</option>
+                                <option value="08" @if($electricity->month == '08') selected @endif>August</option>
+                                <option value="09" @if($electricity->month == '09') selected @endif>September</option>
+                                <option value="10" @if($electricity->month == '10') selected @endif>October</option>
+                                <option value="11" @if($electricity->month == '11') selected @endif>November</option>
+                                <option value="12" @if($electricity->month == '12') selected @endif>December</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <select class="form-control" name="year" style="width: 100%;">
                                 <option value="">Choose Year</option>
-                                <option value="2017" @if(date('Y') == $electricity->year) selected @endif>2017</option>
-                                <option value="2018" @if(date('Y') == $electricity->year) selected @endif>2018</option>
-                                <option value="2019" @if(date('Y') == $electricity->year) selected @endif>2019</option>
+                                <option value="2017" @if($electricity->year == '2017') selected @endif>2017</option>
+                                <option value="2018" @if($electricity->year == '2018') selected @endif>2018</option>
+                                <option value="2019" @if($electricity->year == '2019') selected @endif>2019</option>
                             </select>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Create</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Update</button>
         </div>
         <!-- /.box-footer -->
     </form>

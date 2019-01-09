@@ -59,7 +59,7 @@
                   <td align='center'>{{date('F Y',strtotime($labour->year.'-'.$labour->month.'-01'))}}</td>
                   <td align='center'>
                       <a href="{{route('edit-labour', $labour->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                      <a href="{{route('delete-labour', $labour->id)}}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
+                      <a href="{{route('delete-labour', $labour->id)}}" onclick="if(!confirm('Are you sure want to delete?')){return false;}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
                   </td>
                 </tr>
                 <?php $i++;?>

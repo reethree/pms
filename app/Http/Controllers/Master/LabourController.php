@@ -102,7 +102,22 @@ class LabourController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Labour";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-labour'),
+                'title' => 'Labour'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['labour'] = \DB::table('labour')->find($id);
+
+        return view('modules.labour.edit', $data);
     }
 
     /**
@@ -114,7 +129,16 @@ class LabourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('labour')->where('id',$id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Labour has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
@@ -125,7 +149,11 @@ class LabourController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('labour')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Labour has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
     
     public function getDataLabourByYear(Request $request)
