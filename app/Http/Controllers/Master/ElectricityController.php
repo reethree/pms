@@ -101,7 +101,22 @@ class ElectricityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Electricity";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-electricity'),
+                'title' => 'Electricity'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['electricity'] = \DB::table('electricity')->first($id);
+        
+        return view('modules.electricity.edit', $data);
     }
 
     /**
@@ -113,7 +128,16 @@ class ElectricityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('electricity')->where('id',$id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Electricity has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
@@ -124,7 +148,11 @@ class ElectricityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('electricity')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Electricity has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
     
     public function getDataElectricityByYear(Request $request)
