@@ -143,6 +143,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'index-machine',
             'uses' => 'MachineController@index'
         ]);
+        Route::get('/machine/get', [
+            'as' => 'getMachineTable',
+            'uses' => 'MachineController@getTable'
+        ]);
         Route::get('/machine/create', [
             'as' => 'create-machine',
             'uses' => 'MachineController@create'
@@ -169,6 +173,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'index-mould',
             'uses' => 'MouldController@index'
         ]);
+        Route::get('/mould/get', [
+            'as' => 'getMouldTable',
+            'uses' => 'MouldController@getTable'
+        ]);
         Route::get('/mould/create', [
             'as' => 'create-mould',
             'uses' => 'MouldController@create'
@@ -194,6 +202,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/material', [
             'as' => 'index-material',
             'uses' => 'MaterialController@index'
+        ]);
+        Route::get('/material/get', [
+            'as' => 'getMaterialTable',
+            'uses' => 'MaterialController@getTable'
         ]);
         Route::get('/material/create', [
             'as' => 'create-material',
@@ -223,6 +235,10 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/material/group', [
             'as' => 'index-material-group',
             'uses' => 'MaterialController@indexGroup'
+        ]);
+        Route::get('/material/group/get', [
+            'as' => 'getMaterialGroupTable',
+            'uses' => 'MaterialController@getGroupTable'
         ]);
         Route::get('/material/group/create', [
             'as' => 'create-material-group',

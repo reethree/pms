@@ -30,12 +30,16 @@ class CustomerController extends Controller
 
     public function getTable()
     {
-        $customers = \DB::table('customer');
+        $customers = \DB::table('customer')->select(['id', 'name', 'phone', 'address', 'status']);
         return \Datatables::of($customers)
                 ->addColumn('action', function ($customer) {
-                    return '<a href="#edit-'.$customer->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                    return '<a href="'.route('edit-customer', $customer->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-customer', $customer->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
                 })
-                ->make();
+                ->editColumn('status', function ($customer) {
+                    return ucfirst($customer->status);
+                })
+                ->make(true);
     }
     
     /**

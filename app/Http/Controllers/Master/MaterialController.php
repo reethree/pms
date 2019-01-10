@@ -28,6 +28,23 @@ class MaterialController extends Controller
         return view('modules.material.index', $data);
     }
     
+    public function getTable()
+    {
+        $materials = \DB::table('materials');
+        return \Datatables::of($materials)
+                ->addColumn('action', function ($material) {
+                    return '<a href="'.route('edit-material', $material->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-material', $material->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('price', function ($customer) {
+                    return $customer->currency.' '.number_format($customer->price);
+                })
+                ->editColumn('status', function ($customer) {
+                    return ucfirst($customer->status);
+                })
+                ->make(true);
+    }
+    
     public function indexGroup()
     {
         $data['page_title'] = "Material Grouping";
@@ -42,6 +59,23 @@ class MaterialController extends Controller
         $data['groups'] = \DB::table('group_category')->paginate(10);
         
         return view('modules.material.index-group', $data);
+    }
+    
+    public function getGroupTable()
+    {
+        $groups = \DB::table('group_category');
+        return \Datatables::of($groups)
+                ->addColumn('action', function ($group) {
+                    return '<a href="'.route('edit-material-group', $group->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-material-group', $group->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('price', function ($group) {
+                    return number_format($group->price);
+                })
+                ->editColumn('status', function ($group) {
+                    return ucfirst($group->status);
+                })
+                ->make(true);
     }
     
     /**
@@ -185,7 +219,7 @@ class MaterialController extends Controller
         
         $data['material'] = \DB::table('materials')->find($id);
         $data['types'] = \DB::table('material_type')->get();
-        $data['histories'] = \DB::table('material_price')->where('material_id', $id)->orderBy('id', 'DESC')->paginate(5);
+        $data['histories'] = \DB::table('material_price')->where('material_id', $id)->orderBy('date', 'DESC')->paginate(5);
         
         $charts = \DB::table('material_price')->where('material_id', $id)->orderBy('date', 'DESC')->limit(10)->get();
         

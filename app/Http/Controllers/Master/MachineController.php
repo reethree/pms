@@ -27,7 +27,31 @@ class MachineController extends Controller
         
         return view('modules.machine.index', $data);
     }
-
+    
+    public function getTable()
+    {
+        $machines = \DB::table('machines');
+        return \Datatables::of($machines)
+                ->addColumn('action', function ($machine) {
+                    return '<a href="'.route('edit-machine', $machine->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-machine', $machine->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('depreciation', function ($machine) {
+                    if($machine->depreciation == true){
+                        return 'Yes';
+                    }else{
+                        return 'No';
+                    }
+                })
+                ->editColumn('price', function ($machine) {
+                    return number_format($machine->price);
+                })
+                ->editColumn('status', function ($machine) {
+                    return ucfirst($machine->status);
+                })
+                ->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -60,7 +84,9 @@ class MachineController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
-        
+        if(!isset($data['depreciation'])){
+            $data['depreciation'] = 0;
+        }
         $insert_id = \DB::table('machines')->insertGetId($data);
         
         if($insert_id){
@@ -118,7 +144,9 @@ class MachineController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except(['_token']);        
-        
+        if(!isset($data['depreciation'])){
+            $data['depreciation'] = 0;
+        }
         $update = \DB::table('machines')->where('id',$id)->update($data);
         
         if($update){

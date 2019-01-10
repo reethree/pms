@@ -26,10 +26,11 @@ class Controller extends BaseController
         endforeach;
         
         $sum_weight = \DB::table('material_group')->where('group_id',$group_id)->sum('weight');
-
-        $update = \DB::table('group_category')->where('id', $group_id)->update(['price' => $total_cost/$sum_weight]);
+        if($sum_weight){
+            \DB::table('group_category')->where('id', $group_id)->update(['price' => $total_cost/$sum_weight]);
+        }
         
-        return $update;
+        return true;
     }
     
     public function updateAllGroupPrice($material_id)
@@ -41,5 +42,10 @@ class Controller extends BaseController
         endforeach;
         
         return true;
+    }
+    
+    public function getLastMaterialPrice($material_id)
+    {
+        return \DB::table('material_price')->where('material_id', $material_id)->orderBy('date','DESC')->value('price');
     }
 }

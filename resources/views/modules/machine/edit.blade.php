@@ -86,7 +86,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Create</button>
+            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Update</button>
         </div>
         <!-- /.box-footer -->
     </form>

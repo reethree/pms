@@ -14,11 +14,12 @@
             <tbody>
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Year</th>
+<!--                  <th>Year</th>
                   <th>Max</th>
                   <th>Min</th>
-                  <th>Average</th>
+                  <th>Average</th>-->
                   <th>Amount</th>
+                  <th>Profit</th>
                   <th>Overhead (Buffer)<br />per PCS</th>
                   <th></th>
                 </tr>
@@ -26,11 +27,12 @@
                 @foreach($order_overhead as $oo)
                 <tr>
                     <td>{{$i}}</td>
-                    <td>{{$oo->year}}</td>
+<!--                    <td>{{$oo->year}}</td>
                     <td>{{number_format($oo->max)}}</td>
                     <td>{{number_format($oo->min)}}</td>
-                    <td>{{number_format($oo->avg)}}</td>
-                    <td>{{number_format($oo->amount)}}</td>
+                    <td>{{number_format($oo->avg)}}</td>-->
+                    <td>{{number_format($oo->amount).'%'}}</td>
+                    <td>{{number_format($oo->profit).'%'}}</td>
                     <td align="center"><b>{{number_format($oo->amount_pcs)}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oo->id, 'overhead'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -61,7 +63,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label class="col-sm-3 control-label">Year</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="overhead_year" name="year" style="width: 100%;">
@@ -98,13 +100,22 @@
                                     <input type="text" name="avg" class="form-control" id="overhead_avg" placeholder="Average Value" required readonly>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Amount (Buffer)</label>
+                                <label for="amount" class="col-sm-3 control-label">Overhead (%)</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                    <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <input type="number" max="100" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <span class="input-group-addon">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Profit (%)</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="number" max="100" name="profit" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                             </div>

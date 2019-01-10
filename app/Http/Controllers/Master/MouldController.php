@@ -27,7 +27,31 @@ class MouldController extends Controller
         
         return view('modules.mould.index', $data);
     }
-
+    
+    public function getTable()
+    {
+        $moulds = \DB::table('mould');
+        return \Datatables::of($moulds)
+                ->addColumn('action', function ($mould) {
+                    return '<a href="'.route('edit-mould', $mould->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-mould', $mould->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('depreciation', function ($mould) {
+                    if($mould->depreciation == true){
+                        return 'Yes';
+                    }else{
+                        return 'No';
+                    }
+                })
+                ->editColumn('price', function ($mould) {
+                    return number_format($mould->price);
+                })
+                ->editColumn('status', function ($mould) {
+                    return ucfirst($mould->status);
+                })
+                ->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -60,7 +84,9 @@ class MouldController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
-        
+        if(!isset($data['depreciation'])){
+            $data['depreciation'] = 0;
+        }
         $insert_id = \DB::table('mould')->insertGetId($data);
         
         if($insert_id){
@@ -118,7 +144,9 @@ class MouldController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except(['_token']);        
-        
+        if(!isset($data['depreciation'])){
+            $data['depreciation'] = 0;
+        }
         $update = \DB::table('mould')->where('id',$id)->update($data);
         
         if($update){

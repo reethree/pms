@@ -127,7 +127,13 @@ class ProductController extends Controller
         $data['customers'] = \DB::table('customer')->get();
         $data['moulds'] = \DB::table('mould')->get();
         $data['machines'] = \DB::table('machines')->get();
-        $data['materials'] = \DB::table('materials')->get();
+        
+        $materials = \DB::table('materials')->get();
+        foreach ($materials as $material):
+            $material->price_last = $this->getLastMaterialPrice($material->id);
+        endforeach;
+        
+        $data['materials'] = $materials;
         
         $data['groups'] = \DB::table('group_category')->get();
         

@@ -247,12 +247,12 @@
         // AREA CHART
         var area = new Morris.Area({
           element: 'price-chart',
-          resize: true,
+          resize: false,
           data: JSON.parse(data.replace(/&quot;/g,'"')),
           xkey: 'y',
           ykeys: ['price'],
           labels: ['Price'],
-          lineColors: ['#ff0000'],
+          lineColors: ['#FF0000'],
           hideHover: 'auto'
         });
     });
