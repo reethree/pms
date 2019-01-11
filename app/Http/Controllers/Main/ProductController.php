@@ -32,7 +32,21 @@ class ProductController extends Controller
         
         return view('modules.product.index', $data);
     }
-
+    
+    public function getTable()
+    {
+        $products = \DB::table('products');
+        return \Datatables::of($products)
+                ->addColumn('action', function ($product) {
+                    return '<a href="'.route('edit-product', $product->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-product', $product->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('status', function ($product) {
+                    return ucfirst($product->status);
+                })
+                ->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
