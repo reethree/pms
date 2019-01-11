@@ -37,7 +37,7 @@ class MachineController extends Controller
                     . '&nbsp;<a href="'.route('delete-machine', $machine->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
                 })
                 ->addColumn('image', function ($machine) {
-                    return '<img src="https://www.hollisterwhitney.com/wp-content/uploads/2018/02/1-Overhead-Traction-Machine-510px.png" width="100" />';
+                    return '<img src="https://www.hollisterwhitney.com/wp-content/uploads/2018/02/1-Overhead-Traction-Machine-510px.png" width="120" />';
                 })
                 ->editColumn('depreciation', function ($machine) {
                     if($machine->depreciation == true){
@@ -52,6 +52,7 @@ class MachineController extends Controller
                 ->editColumn('status', function ($machine) {
                     return ucfirst($machine->status);
                 })
+                ->rawColumns(['image', 'action'])
                 ->make(true);
     }
     
