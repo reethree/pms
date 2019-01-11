@@ -23,23 +23,37 @@ class ProductController extends Controller
             ]
         ]; 
         
-        $products = \DB::table('products')
-                ->select('products.*','customer.name as customer_name')
-                ->leftjoin('customer', 'products.customer_id','=','customer.id')
-                ->paginate(10);
-        
-        $data['products'] = $products;
+//        $products = \DB::table('products')
+//                ->select('products.*','customer.name as customer_name')
+//                ->leftjoin('customer', 'products.customer_id','=','customer.id')
+//                ->paginate(10);
+//        
+//        $data['products'] = $products;
         
         return view('modules.product.index', $data);
     }
     
     public function getTable()
     {
-        $products = \DB::table('products');
+        $products = \DB::table('products')
+                ->select('products.*','customer.name as customer_name')
+                ->leftjoin('customer', 'products.customer_id','=','customer.id');
         return \Datatables::of($products)
                 ->addColumn('action', function ($product) {
                     return '<a href="'.route('edit-product', $product->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
                     . '&nbsp;<a href="'.route('delete-product', $product->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('weight_pre', function ($product) {
+                    return $product->weight_pre.' Gram';
+                })
+                ->editColumn('weight_buff', function ($product) {
+                    return $product->weight_buff.' Gram';
+                })
+                ->editColumn('efficiency_actual', function ($product) {
+                    return $product->efficiency_actual.'%';
+                })
+                ->editColumn('efficiency_buffer', function ($product) {
+                    return $product->efficiency_buffer.'%';
                 })
                 ->editColumn('status', function ($product) {
                     return ucfirst($product->status);

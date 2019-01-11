@@ -52,10 +52,10 @@
         ajax: '{{route("getMaterialTable")}}',
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'Name'},
-            {data: 'type', name: 'Type'},
-            {data: 'price', name: 'Price'},
-            {data: 'status', name: 'Status'},
+            {data: 'name', name: 'name'},
+            {data: 'type', name: 'type'},
+            {data: 'price', name: 'price'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'Action', orderable: false, searchable: false}
         ]
     });

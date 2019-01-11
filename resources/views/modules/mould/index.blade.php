@@ -54,12 +54,12 @@
         ajax: '{{route("getMouldTable")}}',
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'Name'},
-            {data: 'no_of_cavity', name: 'No. of Cavity'},
-            {data: 'price', name: 'Price'},
-            {data: 'lifetime', name: 'Lifetime'},
-            {data: 'depreciation', name: 'Depreciation'},
-            {data: 'status', name: 'Status'},
+            {data: 'name', name: 'name'},
+            {data: 'no_of_cavity', name: 'no_of_cavity'},
+            {data: 'price', name: 'price'},
+            {data: 'lifetime', name: 'lifetime'},
+            {data: 'depreciation', name: 'depreciation'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'Action', orderable: false, searchable: false}
         ]
     });

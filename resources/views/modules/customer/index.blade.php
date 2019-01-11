@@ -52,10 +52,10 @@
         ajax: '{{route("getCustomerTable")}}',
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'Name'},
-            {data: 'phone', name: 'Phone'},
-            {data: 'address', name: 'Address'},
-            {data: 'status', name: 'Status'},
+            {data: 'name', name: 'name'},
+            {data: 'phone', name: 'phone'},
+            {data: 'address', name: 'address'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'Action', orderable: false, searchable: false}
         ]
     });

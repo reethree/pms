@@ -56,14 +56,14 @@
         ajax: '{{route("getMachineTable")}}',
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'Name'},
-            {data: 'brand', name: 'Brand'},
-            {data: 'price', name: 'Price'},
-            {data: 'clamping_force', name: 'Clamping Force'},
-            {data: 'depreciation', name: 'Depreciation'},
-            {data: 'purchase_year', name: 'Purchase Year'},
-            {data: 'production_year', name: 'Production Year'},
-            {data: 'status', name: 'Status'},
+            {data: 'name', name: 'name'},
+            {data: 'brand', name: 'brand'},
+            {data: 'price', name: 'price'},
+            {data: 'clamping_force', name: 'clamping_force'},
+            {data: 'depreciation', name: 'depreciation'},
+            {data: 'purchase_year', name: 'purchase_year'},
+            {data: 'production_year', name: 'production_year'},
+            {data: 'status', name: 'status'},
             {data: 'action', name: 'Action', orderable: false, searchable: false}
         ]
     });
