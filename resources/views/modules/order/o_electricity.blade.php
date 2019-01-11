@@ -31,7 +31,7 @@
                     <td align="center">{{number_format($oe->days_needed)}}</td>
                     <td>{{number_format($oe->avg_bill)}}</td>
                     <td>{{number_format($oe->amount)}}</td>
-                    <td align="center"><b>{{number_format($oe->pcs)}}</b></td>
+                    <td align="center"><b>{{$oe->pcs}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oe->id, 'electricity'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
