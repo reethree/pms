@@ -273,6 +273,12 @@ class OrderController extends Controller
             
             $material_kg = round($sum_material_amount/$sum_material_qty);
             $material_kg_cost = round($sum_material_cost/$sum_material_qty);
+            
+            return json_encode(array(
+                'qty_buffer' => $qty_buffer,
+                'material_kg' => $material_kg
+            ));
+            
             $material_buffer = $material_kg/$qty_buffer;
             $material_cost = $material_kg_cost/$qty_cost;
             

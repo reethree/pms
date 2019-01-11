@@ -23,7 +23,7 @@ class MachineController extends Controller
             ]
         ]; 
         
-        $data['machines'] = \DB::table('machines')->paginate(10);
+//        $data['machines'] = \DB::table('machines')->paginate(10);
         
         return view('modules.machine.index', $data);
     }
@@ -35,6 +35,9 @@ class MachineController extends Controller
                 ->addColumn('action', function ($machine) {
                     return '<a href="'.route('edit-machine', $machine->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
                     . '&nbsp;<a href="'.route('delete-machine', $machine->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->addColumn('image', function ($machine) {
+                    return '<img src="https://www.hollisterwhitney.com/wp-content/uploads/2018/02/1-Overhead-Traction-Machine-510px.png" width="100" />';
                 })
                 ->editColumn('depreciation', function ($machine) {
                     if($machine->depreciation == true){

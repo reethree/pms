@@ -24,6 +24,7 @@
               <thead>
                 <tr>
                     <th>#</th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Brand</th>
                     <th>Price</th>
@@ -56,6 +57,7 @@
         ajax: '{{route("getMachineTable")}}',
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'image', name: 'image', orderable: false, searchable: false},
             {data: 'name', name: 'name'},
             {data: 'brand', name: 'brand'},
             {data: 'price', name: 'price'},

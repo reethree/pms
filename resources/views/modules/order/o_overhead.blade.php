@@ -105,7 +105,7 @@
                                 <label for="amount" class="col-sm-3 control-label">Overhead (%)</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="number" max="100" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <input type="text" max="100" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                 <label for="amount" class="col-sm-3 control-label">Profit (%)</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="number" max="100" name="profit" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <input type="text" max="100" name="profit" class="form-control" id="amount_overhead" placeholder="Amount" required>
                                         <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
