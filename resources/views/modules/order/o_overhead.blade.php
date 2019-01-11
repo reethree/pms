@@ -20,7 +20,7 @@
                   <th>Average</th>-->
                   <th>Amount</th>
                   <th>Profit</th>
-                  <th>Overhead (Buffer)<br />per PCS</th>
+                  <!--<th>Overhead (Buffer)<br />per PCS</th>-->
                   <th></th>
                 </tr>
                 <?php $i = 1;?>
@@ -33,7 +33,7 @@
                     <td>{{number_format($oo->avg)}}</td>-->
                     <td>{{number_format($oo->amount).'%'}}</td>
                     <td>{{number_format($oo->profit).'%'}}</td>
-                    <td align="center"><b>{{number_format($oo->amount_pcs)}}</b></td>
+                    <!--<td align="center"><b>{{number_format($oo->amount_pcs)}}</b></td>-->
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oo->id, 'overhead'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>

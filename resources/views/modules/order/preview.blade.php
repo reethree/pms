@@ -1,7 +1,7 @@
 @extends('main-layout')
 
 @section('content')
-      
+<?php $overhead = 0;$overhead_price = 0;$profile = 0;$profile_price = 0;?>
 <!--<div class="row">
     <div class="col-xs-12">
       <div class="box">
@@ -184,15 +184,6 @@
                 </tr>
                 <?php $i++;$total_cost+=$o_trans->cost_pcs;$total_price+=$o_trans->amount_pcs;?>
             @endforeach
-            @foreach($order_overhead as $o_over)
-                <tr>
-                  <td>{{$i}}</td>
-                  <td>Overhead</td>
-                  <td>{{$o_over->amount_pcs}}</td>  
-                  <td>{{$o_over->amount_pcs}}</td> 
-                </tr>
-                <?php $i++;$total_cost+=$o_over->amount_pcs;$total_price+=$o_over->amount_pcs;?>
-            @endforeach
             <tr>
                 <td colspan="2" align="center"><b>TOTAL</b></td>
                 <td><b>{{$total_cost}}</b></td>
@@ -212,16 +203,39 @@
         <div class="table-responsive">
           <table class="table">
             <tr>
-              <th style="width:50%">Total Per PCS:</th>
+              <th style="width:50%">Subtotal Per PCS:</th>
               <td><b>IDR {{ number_format($p_total_cost+$total_cost,2) }}</b></td>
+            </tr>
+            @foreach($order_overhead as $o_over)
+                @if($o_over->amount > 0)
+                    <?php $overhead = ($p_total_cost+$total_cost)*($o_over->amount/100); ?>
+                    <tr>
+                        <th style="width:50%">Overhead ({{$o_over->amount.'%'}}) Per PCS:</th>
+                        <td><b>IDR {{ number_format($overhead,2) }}</b></td>
+                    </tr>
+                @endif
+                @if($o_over->profit > 0)
+                    <?php $profit = ($p_total_cost+$total_cost)*($o_over->profit/100); ?>
+                    <tr>
+                        <th style="width:50%">Profit ({{$o_over->profit.'%'}}) Per PCS:</th>
+                        <td><b>IDR {{ number_format($profit,2) }}</b></td>
+                    </tr>
+                @endif
+            @endforeach
+            <tr>
+                <td colspan="2">--------------------------------------------------</td>
+            </tr>
+            <tr>
+              <th>Total per PCS:</th>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$overhead+$profit))}}</b></td>
             </tr>
             <tr>
               <th>Monthly:</th>
-              <td><b>IDR {{number_format(($p_total_cost+$total_cost)*$monthly_qty)}}</b></td>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$overhead+$profit)*$monthly_qty)}}</b></td>
             </tr>
             <tr>
               <th>Yearly:</th>
-              <td><b>IDR {{number_format(($p_total_cost+$total_cost)*($monthly_qty*12))}}</b></td>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$overhead+$profit)*($monthly_qty*12))}}</b></td>
             </tr>
           </table>
         </div>
@@ -232,16 +246,39 @@
         <div class="table-responsive">
           <table class="table">
             <tr>
-              <th style="width:50%">Total Per PCS:</th>
+              <th style="width:50%">Subtotal Per PCS:</th>
               <td><b>IDR {{ number_format($p_total_price+$total_price,2) }}</b></td>
+            </tr>
+            @foreach($order_overhead as $o_over)
+                @if($o_over->amount > 0)
+                    <?php $overhead_price = ($p_total_price+$total_price)*($o_over->amount/100); ?>
+                    <tr>
+                        <th style="width:50%">Overhead ({{$o_over->amount.'%'}}) Per PCS:</th>
+                        <td><b>IDR {{ number_format($overhead_price,2) }}</b></td>
+                    </tr>
+                @endif
+                @if($o_over->profit > 0)
+                    <?php $profit_price = ($p_total_price+$total_price)*($o_over->profit/100); ?>
+                    <tr>
+                        <th style="width:50%">Profit ({{$o_over->profit.'%'}}) Per PCS:</th>
+                        <td><b>IDR {{ number_format($profit_price,2) }}</b></td>
+                    </tr>
+                @endif
+            @endforeach
+            <tr>
+                <td colspan="2">--------------------------------------------------</td>
+            </tr>
+            <tr>
+              <th>Total per PCS:</th>
+              <td><b>IDR {{number_format(($p_total_price+$total_price+$overhead_price+$profit_price))}}</b></td>
             </tr>
             <tr>
               <th>Monthly:</th>
-              <td><b>IDR {{number_format(($p_total_price+$total_price)*$monthly_qty)}}</b></td>
+              <td><b>IDR {{number_format(($p_total_price+$total_price+$overhead_price+$profit_price)*$monthly_qty)}}</b></td>
             </tr>
             <tr>
               <th>Yearly:</th>
-              <td><b>IDR {{number_format(($p_total_price+$total_price)*($monthly_qty*12))}}</b></td>
+              <td><b>IDR {{number_format(($p_total_price+$total_price+$overhead_price+$profit_price)*($monthly_qty*12))}}</b></td>
             </tr>
           </table>
         </div>
