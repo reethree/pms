@@ -159,6 +159,10 @@ class LabourController extends Controller
     public function getDataLabourByYear(Request $request)
     {
         $year = $request->year;
+        $order_id = $request->order_id;
+        
+        $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
+        $sum_daily_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('daily_qty');
         
         $labours = \DB::table('labour')->where('year', $year)->get();
         $data['sum_employee'] = 0;$data['sum_wages'] = 0;$data['avg_labour'] = 0;$data['shift_labour'] = 0;
@@ -179,6 +183,12 @@ class LabourController extends Controller
             $data['shift_labour'] = number_format(round($monthly/25));
             // cost head per day
             $data['cost_head_day'] = number_format(round($head/25));
+            // Qty Prod
+            if($sum_daily_qty){
+                $data['qty_prod'] = round($sum_product_qty/$sum_daily_qty);
+            }else{
+                $data['qty_prod'] = 0;
+            }
         endif;
         
         return json_encode($data);

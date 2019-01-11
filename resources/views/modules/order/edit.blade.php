@@ -88,9 +88,10 @@
     $("#labour_year").on("change", function(){
         var year = $(this).val();
         var url = '{{route("getDataLabourByYear")}}';
+        var order_id = '{{$order->id}}';
         $.ajax({
             type: 'GET',
-            data: {'year' : year},
+            data: {'year': year,'order_id': order_id},
             dataType : 'json',
             url: url,
             error: function (jqXHR, textStatus, errorThrown)
@@ -104,6 +105,7 @@
                 $('#cost_per_shift').val(json.shift_labour);
                 $('#cost_head').val(json.avg_labour);
                 $('#cost_head_day').val(json.cost_head_day);
+                $('#qty_prod').val(json.qty_prod);
             }
         });
     });
