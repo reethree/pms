@@ -17,6 +17,7 @@
                       <th style="width: 10px">#</th>
                       <th>Name</th>
                       <th>Cavity</th>
+                      <th>Depr (Month)</th>
                       <th>Cost</th>
                       <th>Amount (Buffer)</th>
                       <th></th>
@@ -27,6 +28,7 @@
                       <td>{{$i}}</td>
                       <td>{{$product_mould->mould_name}}</td>
                       <td align="center">{{$product_mould->cavity}}</td>
+                      <td align="center">{{$product_mould->mould_depr}}</td>
                       <td>{{number_format($product_mould->mould_cost)}}</td>
                       <td>{{number_format($product_mould->mould_buff)}}</td>
                       <td>
@@ -36,7 +38,7 @@
                     <?php $total_mould += $product_mould->mould_buff;$i++;?>
                     @endforeach
                     <tr>
-                        <td colspan="4">Total Amount</td>
+                        <td colspan="5">Total Amount</td>
                         <td colspan="2"><b>{{number_format($total_mould)}}</b></td>
                     </tr>
                 </tbody>
@@ -83,11 +85,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="mould_buff" class="col-sm-3 control-label">Amount</label>
+                                <label for="mould_buff" class="col-sm-3 control-label">Buffer</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
                                     <input type="number" name="mould_buff" class="form-control" id="mould_buff" placeholder="Amount" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mould_depr" class="col-sm-3 control-label">Depr. Period</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    
+                                    <input type="number" name="mould_depr" class="form-control" id="mould_depr" required>
+                                    <span class="input-group-addon">Month</span>
                                     </div>
                                 </div>
                             </div>

@@ -31,8 +31,8 @@
                     <td>{{number_format($oo->max)}}</td>
                     <td>{{number_format($oo->min)}}</td>
                     <td>{{number_format($oo->avg)}}</td>-->
-                    <td>{{number_format($oo->amount).'%'}}</td>
-                    <td>{{number_format($oo->profit).'%'}}</td>
+                    <td>{{number_format($oo->amount)}}</td>
+                    <td>{{number_format($oo->profit)}}</td>
                     <!--<td align="center"><b>{{number_format($oo->amount_pcs)}}</b></td>-->
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oo->id, 'overhead'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
@@ -102,20 +102,20 @@
                                 </div>
                             </div>-->
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Overhead (%)</label>
+                                <label for="amount" class="col-sm-3 control-label">Overhead</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="text" max="100" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
-                                        <span class="input-group-addon">%</span>
+                                        <span class="input-group-addon">IDR</span>
+                                        <input type="number" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Profit (%)</label>
+                                <label for="amount" class="col-sm-3 control-label">Profit</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input type="text" max="100" name="profit" class="form-control" id="amount_overhead" placeholder="Amount" required>
-                                        <span class="input-group-addon">%</span>
+                                        <span class="input-group-addon">IDR</span>
+                                        <input type="number" name="profit" class="form-control" id="amount_profit" placeholder="Profit" required>
                                     </div>
                                 </div>
                             </div>

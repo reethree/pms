@@ -239,10 +239,22 @@ class OrderController extends Controller
             $product = \DB::table('products')->find($data['product_id']);
 
             // Mould Calculation
-            $sum_mould = \DB::table('product_mould')->where('product_id', $product->id)->sum('mould_buff');
-            $sum_mould_cost = \DB::table('product_mould')->where('product_id', $product->id)->sum('mould_cost');
-            $mould_buffer = $sum_mould/($data['quantity']*12);
-            $mould_cost = $sum_mould_cost/($data['quantity']*12);
+            $moulds = \DB::table('product_mould')->where('product_id', $product->id)->get();
+            $mould_buffer = 0;
+            $mould_cost = 0;
+            foreach ($moulds as $mould):
+                $depr = $mould->mould_depr/12;
+                $buffer = ($mould->mould_buff/($data['quantity']*12)/$depr);
+                $cost = ($mould->mould_cost/($data['quantity']*12)/$depr);
+                
+                $mould_buffer += $buffer;
+                $mould_cost += $cost;
+            endforeach;
+//            return $mould_buffer;
+//            $sum_mould = \DB::table('product_mould')->where('product_id', $product->id)->sum('mould_buff');
+//            $sum_mould_cost = \DB::table('product_mould')->where('product_id', $product->id)->sum('mould_cost');
+//            $mould_buffer = $sum_mould/($data['quantity']*12);
+//            $mould_cost = $sum_mould_cost/($data['quantity']*12);
 
             // Machine Calculation
             $sum_machine = \DB::table('product_machine')->where('product_id', $product->id)->sum('amount');
@@ -276,7 +288,8 @@ class OrderController extends Controller
             
 //            return json_encode(array(
 //                'qty_buffer' => $qty_buffer,
-//                'material_kg' => $material_kg
+//                'material_kg' => $material_kg,
+//                'buffer' => $material_kg/$qty_buffer
 //            ));
             
             $material_buffer = $material_kg/$qty_buffer;
@@ -294,8 +307,8 @@ class OrderController extends Controller
             $insert_id = \DB::table('order_product')->insertGetId($data);
             
         }elseif($type == 'labour'){
-            $cost_monthly = (str_replace(",", "", $data['cost_head_day'])*$data['qty']);
-            $amount_monthly = ($data['amount']*$data['qty']);
+            $cost_monthly = ((str_replace(",", "", $data['cost_head'])/25)*$data['qty']);
+            $amount_monthly = ($data['amount']/25)*$data['qty'];
             
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
             

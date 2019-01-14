@@ -108,11 +108,11 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Days Needed</label>
                                 <div class="col-sm-8">
-                                    <input type="number" name="days_needed" class="form-control" placeholder="Total Machine" required>
+                                    <input type="number" name="days_needed" class="form-control" placeholder="Days Needed" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Amount (Buffer)</label>
+                                <label for="amount" class="col-sm-3 control-label">Buffer per Month</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>

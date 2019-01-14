@@ -15,9 +15,8 @@
                 <tr>
                   <th style="width: 10px">#</th>
                   <th>Year</th>
-                  <th>Wages per Month</th>
-                  <th>Cost per Day<br />(Cost)</th>
-                  <th>Amount per Day<br />(Buffer)</th>
+                  <th>Cost per Month</th>
+                  <th>Buffer per Month</th>
                   <th>Days Needed</th>
                   <th>Labour (Cost)<br />per PCS</th>
                   <th>Labour (Buffer)<br />per PCS</th>
@@ -29,7 +28,6 @@
                     <td>{{$i}}</td>
                     <td>{{$ol->year}}</td>
                     <td>{{number_format($ol->cost_head)}}</td>
-                    <td>{{number_format($ol->cost_head_day)}}</td>
                     <td>{{number_format($ol->amount)}}</td>
                     <td align="center">{{$ol->qty}}</td>
                     <td align="center">{{$ol->labour_cost}}</td>
@@ -100,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display: none;">
                                 <label class="col-sm-3 control-label">Cost Head /Day</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
@@ -116,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="amount_per_shift" class="col-sm-3 control-label">Amount Head /Day</label>
+                                <label for="amount_per_shift" class="col-sm-3 control-label">Buffer /Month</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
