@@ -45,6 +45,15 @@
                       </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label">USD Rate</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">IDR</span>
+                                <input type="number" name="rate" class="form-control" placeholder="Rate USD to IDR">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Date Price</label>
                         <div class="col-sm-8">
                             <div class="input-group date">
@@ -74,6 +83,7 @@
                                 <th style="text-align: center;">Date Price</th>
                                 <th style="text-align: center;">Currency</th>
                                 <th style="text-align: center;">Price</th>
+                                <th style="text-align: center;">USD Rate</th>
                             </tr>
                             <?php $i = 1;?>
                             @foreach($histories as $history)
@@ -81,7 +91,8 @@
                                   <td>{{$i}}</td>
                                   <td align='center'>{{date('d F Y', strtotime($history->date))}}</td>
                                   <td align='center'>{{$history->currency}}</td>
-                                  <td align='center'>@if($history->currency == 'IDR') {{number_format($history->price)}} @else {{$history->price}} @endif</td>           
+                                  <td align='center'>@if($history->currency == 'IDR') {{number_format($history->price)}} @else {{$history->price}} @endif</td>   
+                                  <td align='center'>{{number_format($history->rate)}}</td>
                                 </tr>
                                 <?php $i++;?>
                             @endforeach

@@ -163,9 +163,11 @@
     $("#material_id").on("change", function(){
         var price = $(this).find(':selected').data('cost');
         var curr = $(this).find(':selected').data('curr');
-        var rate = $("#usd_rate").val();
+//        var rate = $("#usd_rate").val();
+        var rate = $(this).find(':selected').data('rate');
         var cost = price;
         
+        $("#usd_rate").val(rate);
         $("#material_price").val(price);
         $("#currency").html(curr);
         

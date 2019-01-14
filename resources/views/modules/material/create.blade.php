@@ -45,6 +45,15 @@
                       </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label">USD Rate</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">IDR</span>
+                                <input type="number" name="rate" class="form-control" placeholder="Rate USD to IDR">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Date Price</label>
                         <div class="col-sm-8">
                             <div class="input-group date">

@@ -141,6 +141,7 @@ class MaterialController extends Controller
             $data_price['material_id'] = $insert_id;
             $data_price['currency'] = $data['currency'];
             $data_price['price'] = $data['price'];
+            $data_price['rate'] = $data['rate'];
             $data_price['date'] = $date_price;
             
             $insert_price = \DB::table('material_price')->insertGetId($data_price);

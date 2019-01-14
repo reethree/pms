@@ -158,7 +158,9 @@ class ProductController extends Controller
         
         $materials = \DB::table('materials')->get();
         foreach ($materials as $material):
-            $material->price_last = $this->getLastMaterialPrice($material->id);
+            $m_price = $this->getLastMaterialPrice($material->id);
+            $material->price_last = ($m_price) ? $m_price->price : 0;
+            $material->rate = ($m_price) ? $m_price->rate : 0;
         endforeach;
         
         $data['materials'] = $materials;

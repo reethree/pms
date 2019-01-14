@@ -46,6 +46,6 @@ class Controller extends BaseController
     
     public function getLastMaterialPrice($material_id)
     {
-        return \DB::table('material_price')->where('material_id', $material_id)->orderBy('date','DESC')->value('price');
+        return \DB::table('material_price')->where('material_id', $material_id)->orderBy('date','DESC')->first();
     }
 }

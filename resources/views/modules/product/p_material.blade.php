@@ -111,7 +111,7 @@
                                     <select class="form-control" id='material_id' name="material_id" style="width: 100%;">
                                         <option value="">Choose Material</option>
                                         @foreach($materials as $material)
-                                            <option value="{{$material->id}}" data-cost="{{$material->price_last}}" data-type="{{$material->type}}" data-curr="{{$material->currency}}">{{$material->name}}</option>
+                                            <option value="{{$material->id}}" data-cost="{{$material->price_last}}" data-rate="{{$material->rate}}" data-type="{{$material->type}}" data-curr="{{$material->currency}}">{{$material->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -131,7 +131,7 @@
                                 <div class="col-sm-5">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" class="form-control" id="usd_rate" value="{{$rate}}" required>
+                                    <input type="text" class="form-control" id="usd_rate" required>
                                     </div>
                                 </div>
                             </div>
