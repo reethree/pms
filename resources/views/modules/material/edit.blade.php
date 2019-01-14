@@ -85,7 +85,7 @@
                                 <th style="text-align: center;">Price</th>
                                 <th style="text-align: center;">USD Rate</th>
                             </tr>
-                            <?php $i = 1;?>
+                            <?php $i = 1;$price_history = array();?>
                             @foreach($histories as $history)
                                 <tr>
                                   <td>{{$i}}</td>
@@ -94,7 +94,7 @@
                                   <td align='center'>@if($history->currency == 'IDR') {{number_format($history->price)}} @else {{$history->price}} @endif</td>   
                                   <td align='center'>{{number_format($history->rate)}}</td>
                                 </tr>
-                                <?php $i++;?>
+                                <?php $i++;$price_history[]=$history->price;?>
                             @endforeach
                         </table>
                         {{ $histories->links() }}
@@ -193,6 +193,9 @@
 <script type="text/javascript">
     $('select').select2(); 
     
+    var min_price = '@if(count($price_history)>0){{ min($price_history) }}@else{{ 0 }}@endif';
+    var max_price = '@if(count($price_history)>0){{ max($price_history) }}@else{{ 0 }}@endif';
+    
     $('.datepicker').datepicker({
         autoclose: true,
         todayHighlight: true,
@@ -264,7 +267,11 @@
           ykeys: ['price'],
           labels: ['Price'],
           lineColors: ['#FF0000'],
-          hideHover: 'auto'
+          hideHover: 'auto',
+          fillOpacity: 0.2,
+          xLabels: 'day',
+          ymin: parseInt(min_price)-1,
+          ymax: parseInt(max_price)+1
         });
     });
     
