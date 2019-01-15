@@ -153,6 +153,22 @@
             }
         });
     });
+    
+    $("#overhead_pcs").on("change", function(){
+        var pcs = $(this).val();
+        var quantity = '{{ $sum_product }}';
+        var amount = parseInt(quantity)*pcs;
+        
+        $('#amount_overhead').val(amount);
+    });
+    
+    $("#profit_pcs").on("change", function(){
+        var pcs = $(this).val();
+        var quantity = '{{ $sum_product }}';
+        var amount = parseInt(quantity)*pcs;
+        
+        $('#amount_profit').val(amount);
+    });
   
 </script>
 

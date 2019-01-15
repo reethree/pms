@@ -106,7 +106,16 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">IDR</span>
-                                        <input type="number" name="amount" class="form-control" id="amount_overhead" placeholder="Amount" required>
+                                        <input type="number" name="amount" class="form-control" id="overhead_pcs" placeholder="Amount" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Overhead Amount</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">IDR</span>
+                                        <input type="number" class="form-control" id="amount_overhead" placeholder="Amount" value="0" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +124,16 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">IDR</span>
-                                        <input type="number" name="profit" class="form-control" id="amount_profit" placeholder="Profit" required>
+                                        <input type="number" name="profit" class="form-control" id="profit_pcs" placeholder="Profit" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Profit Amount</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">IDR</span>
+                                        <input type="number" class="form-control" id="amount_profit" placeholder="Amount" value="0" readonly>
                                     </div>
                                 </div>
                             </div>

@@ -203,6 +203,8 @@ class OrderController extends Controller
         
         $data['products'] = \DB::table('products')->get();
         
+        $data['sum_product'] = \DB::table('order_product')->where('order_id', $id)->sum('quantity');
+        
         return view('modules.order.edit', $data);
     }
 
