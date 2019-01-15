@@ -23,7 +23,7 @@ class LabourController extends Controller
             ]
         ]; 
         
-        $charts = \DB::table('labour')->where('year', date('Y'))->get();
+        $charts = \DB::table('labour')->orderBy('month','asc')->orderBy('year','desc')->limit(12)->get();
         
         $dataChart = array();
         foreach ($charts as $chart):
@@ -34,7 +34,7 @@ class LabourController extends Controller
             );
         endforeach;
         
-        $data['labours'] = \DB::table('labour')->orderBy('month','asc')->paginate(10);
+        $data['labours'] = \DB::table('labour')->orderBy('month','asc')->orderBy('year','desc')->paginate(10);
         $data['chart'] = json_encode($dataChart);
         
         return view('modules.labour.index', $data);

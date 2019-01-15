@@ -23,7 +23,7 @@ class ElectricityController extends Controller
             ]
         ]; 
         
-        $charts = \DB::table('electricity')->where('year', date('Y'))->get();
+        $charts = \DB::table('electricity')->orderBy('month','asc')->orderBy('year','desc')->limit(12)->get();
         
         $dataChart = array();
         foreach ($charts as $chart):
@@ -33,7 +33,7 @@ class ElectricityController extends Controller
             );
         endforeach;
         
-        $data['electricities'] = \DB::table('electricity')->orderBy('month','asc')->paginate(10);
+        $data['electricities'] = \DB::table('electricity')->orderBy('month','asc')->orderBy('year','desc')->paginate(10);
         $data['chart'] = json_encode($dataChart);
         
         return view('modules.electricity.index', $data);

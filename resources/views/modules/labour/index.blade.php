@@ -95,6 +95,7 @@
     
 <script>
 $(function () {
+    
     "use strict";
     var data = '{{ $chart }}';
     console.log(JSON.parse(data.replace(/&quot;/g,'"')));
@@ -107,7 +108,8 @@ $(function () {
       ykeys: ['employee', 'wages'],
       labels: ['Employee', 'Wages'],
       lineColors: ['#a0d0e0', '#3c8dbc'],
-      hideHover: 'auto'
+        hideHover: 'auto',
+        xLabels: 'month',
     });
 
   });

@@ -47,7 +47,7 @@
                 <th style="text-align: center;">Historical date</th>
                 <th style="text-align: center;">Action</th>
             </tr>
-            <?php $i = 1;?>
+            <?php $i = 1;$price_history = array();?>
             @foreach($electricities as $electricity)
                 <tr>
                   <td>{{$electricity->id}}</td>
@@ -58,7 +58,7 @@
                       <a href="{{route('delete-electricity', $electricity->id)}}" onclick="if(!confirm('Are you sure want to delete?')){return false;}" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>
                   </td>
                 </tr>
-                <?php $i++;?>
+                <?php $i++;$price_history[]=$electricity->monthly_bill;?>
             @endforeach
           </table>
         </div>
@@ -90,6 +90,10 @@
     
 <script>
 $(function () {
+    
+    var min_price = '@if(count($price_history)>0){{ min($price_history) }}@else{{ 0 }}@endif';
+    var max_price = '@if(count($price_history)>0){{ max($price_history) }}@else{{ 0 }}@endif';
+    
     "use strict";
     var data = '{{ $chart }}';
     console.log(JSON.parse(data.replace(/&quot;/g,'"')));
@@ -102,7 +106,10 @@ $(function () {
       ykeys: ['bill'],
       labels: ['Bill'],
       lineColors: ['#a0d0e0'],
-      hideHover: 'auto'
+      hideHover: 'auto',
+        xLabels: 'month',
+        ymin: parseInt(min_price)-1,
+        ymax: parseInt(max_price)+1
     });
 });
 </script>
