@@ -60,7 +60,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" name="date_price" class="form-control pull-right datepicker" required>
+                                <input type="text" name="date_price" class="form-control pull-right datepicker" required value="{{date('Y-m-d')}}">
                             </div>
                         </div>
                     </div>

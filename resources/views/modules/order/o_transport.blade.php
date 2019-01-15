@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Amount per Month</label>
+                                <label class="col-sm-3 control-label">Buffer per Month</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>

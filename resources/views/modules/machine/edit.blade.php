@@ -36,7 +36,10 @@
                     <div class="form-group">
                       <label for="clamping_force" class="col-sm-3 control-label">Clamping Force</label>
                       <div class="col-sm-8">
-                          <input type="number" name="clamping_force" class="form-control" id="clamping_force" placeholder="Clamping Force" required value="{{$machine->clamping_force}}">
+                        <div class="input-group">
+                            <input type="number" name="clamping_force" class="form-control" id="clamping_force" placeholder="Clamping Force" required value="{{$machine->clamping_force}}">
+                            <span class="input-group-addon">Ton</span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group">

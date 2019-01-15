@@ -36,8 +36,11 @@
                     <div class="form-group">
                       <label for="clamping_force" class="col-sm-3 control-label">Clamping Force</label>
                       <div class="col-sm-8">
+                          <div class="input-group">
                           <input type="number" name="clamping_force" class="form-control" id="clamping_force" placeholder="Clamping Force" required>
-                      </div>
+                          <span class="input-group-addon">Ton</span>
+                          </div>
+                        </div>
                     </div>
                     <div class="form-group">
                       <label for="purchase_year" class="col-sm-3 control-label">Purchase Year</label>

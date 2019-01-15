@@ -102,7 +102,7 @@
                                 </div>
                             </div>-->
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Overhead</label>
+                                <label for="amount" class="col-sm-3 control-label">Overhead /PCS</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">IDR</span>
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Profit</label>
+                                <label for="amount" class="col-sm-3 control-label">Profit /PCS</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">IDR</span>

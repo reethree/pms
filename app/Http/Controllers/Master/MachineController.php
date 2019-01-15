@@ -52,6 +52,9 @@ class MachineController extends Controller
                 ->editColumn('status', function ($machine) {
                     return ucfirst($machine->status);
                 })
+                ->editColumn('clamping_force', function ($machine) {
+                    return $machine->clamping_force.' Ton';
+                })
                 ->rawColumns(['image', 'action'])
                 ->make(true);
     }

@@ -167,7 +167,12 @@
         var rate = $(this).find(':selected').data('rate');
         var cost = price;
         
-        $("#usd_rate").val(rate);
+        if(rate){
+            $("#usd_rate").val(rate);
+        }else{
+            $("#usd_rate").val(0);
+        }
+        
         $("#material_price").val(price);
         $("#currency").html(curr);
         

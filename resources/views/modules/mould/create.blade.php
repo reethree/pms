@@ -36,7 +36,10 @@
                     <div class="form-group">
                       <label for="lifetime" class="col-sm-3 control-label">Lifetime</label>
                       <div class="col-sm-8">
+                          <div class="input-group">
                           <input type="number" name="lifetime" class="form-control" id="lifetime" placeholder="Lifetime" required>
+                          <span class="input-group-addon">Shot</span>
+                          </div>
                       </div>
                     </div>
                     <div class="form-group">
