@@ -43,6 +43,12 @@
                       </div>
                     </div>
                     <div class="form-group">
+                      <label for="photo" class="col-sm-3 control-label">Photo</label>
+                      <div class="col-sm-8">
+                          <input type="file" name="photo" class="form-control" id="photo">
+                      </div>
+                    </div>
+                    <div class="form-group">
                         <label for="depreciation" class="col-sm-3 control-label">Depreciation</label>
                         <div class="col-sm-8">
                             <input type="checkbox" name="depreciation" @if($mould->depreciation == 1) checked @endif id="depreciation" value="1" />
@@ -57,6 +63,9 @@
                             </select>
                         </div>
                     </div>
+                    @if($mould->photo)
+                        <img src="{{asset("uploads/mould/".$mould->photo)}}" width="300" />
+                    @endif
                 </div>
                     
                 <div class="col-md-6"> 

@@ -349,6 +349,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'index-order',
             'uses' => 'OrderController@index'
         ]);
+        Route::get('/order/get', [
+            'as' => 'getOrderTable',
+            'uses' => 'OrderController@getTable'
+        ]);
         Route::get('/order/create', [
             'as' => 'create-order',
             'uses' => 'OrderController@create'

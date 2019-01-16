@@ -36,6 +36,13 @@ class MouldController extends Controller
                     return '<a href="'.route('edit-mould', $mould->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
                     . '&nbsp;<a href="'.route('delete-mould', $mould->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
                 })
+                ->addColumn('image', function ($machine) {
+                    if($machine->photo):
+                        return '<img src="'.asset("uploads/mould/".$machine->photo).'" width="120" />';
+                    else:
+                        return 'No Photo';
+                    endif;
+                })
                 ->editColumn('depreciation', function ($mould) {
                     if($mould->depreciation == true){
                         return 'Yes';
@@ -88,6 +95,16 @@ class MouldController extends Controller
             $data['depreciation'] = 0;
         }
         $insert_id = \DB::table('mould')->insertGetId($data);
+        
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/mould';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
         
         if($insert_id){
             
@@ -147,6 +164,17 @@ class MouldController extends Controller
         if(!isset($data['depreciation'])){
             $data['depreciation'] = 0;
         }
+        
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/mould';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
+        
         $update = \DB::table('mould')->where('id',$id)->update($data);
         
         if($update){

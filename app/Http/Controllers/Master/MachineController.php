@@ -37,7 +37,11 @@ class MachineController extends Controller
                     . '&nbsp;<a href="'.route('delete-machine', $machine->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
                 })
                 ->addColumn('image', function ($machine) {
-                    return '<img src="https://www.hollisterwhitney.com/wp-content/uploads/2018/02/1-Overhead-Traction-Machine-510px.png" width="120" />';
+                    if($machine->photo):
+                        return '<img src="'.asset("uploads/machine/".$machine->photo).'" width="120" />';
+                    else:
+                        return 'No Photo';
+                    endif;
                 })
                 ->editColumn('depreciation', function ($machine) {
                     if($machine->depreciation == true){
@@ -94,6 +98,17 @@ class MachineController extends Controller
         if(!isset($data['depreciation'])){
             $data['depreciation'] = 0;
         }
+        
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/machine';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
+        
         $insert_id = \DB::table('machines')->insertGetId($data);
         
         if($insert_id){
@@ -154,6 +169,17 @@ class MachineController extends Controller
         if(!isset($data['depreciation'])){
             $data['depreciation'] = 0;
         }
+        
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/machine';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
+        
         $update = \DB::table('machines')->where('id',$id)->update($data);
         
         if($update){

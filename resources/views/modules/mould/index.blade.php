@@ -24,6 +24,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>No of Cavity</th>
                         <th>Price</th>
@@ -54,6 +55,7 @@
         ajax: '{{route("getMouldTable")}}',
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'image', name: 'image', orderable: false, searchable: false},
             {data: 'name', name: 'name'},
             {data: 'no_of_cavity', name: 'no_of_cavity'},
             {data: 'price', name: 'price'},

@@ -74,7 +74,12 @@
                           <input type="number" name="production_year" class="form-control" id="production_year" placeholder="Production Year" value="{{$machine->production_year}}">
                       </div>
                     </div>
-                    
+                    <div class="form-group">
+                      <label for="photo" class="col-sm-3 control-label">Photo</label>
+                      <div class="col-sm-8">
+                          <input type="file" name="photo" class="form-control" id="photo">
+                      </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Status</label>
                         <div class="col-sm-8">
@@ -84,6 +89,9 @@
                             </select>
                         </div>
                     </div>
+                    @if($machine->photo)
+                        <img src="{{asset("uploads/machine/".$machine->photo)}}" width="300" />
+                    @endif
                 </div>
             </div>
         </div>

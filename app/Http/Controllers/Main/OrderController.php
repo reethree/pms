@@ -23,11 +23,25 @@ class OrderController extends Controller
             ]
         ]; 
         
-        $orders = \DB::table('orders')->paginate(10);
-        
-        $data['orders'] = $orders;
+//        $orders = \DB::table('orders')->paginate(10);
+//        
+//        $data['orders'] = $orders;
         
         return view('modules.order.index', $data);
+    }
+    
+    public function getTable()
+    {
+        $orders = \DB::table('orders');
+        return \Datatables::of($orders)
+                ->addColumn('action', function ($order) {
+                    return '<a href="'.route('edit-order', $order->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-order', $order->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('status', function ($order) {
+                    return ucfirst($order->status);
+                })
+                ->make(true);
     }
     
     public function preview($id)
