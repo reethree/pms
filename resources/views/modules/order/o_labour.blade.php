@@ -110,7 +110,7 @@
                             <div class="form-group">
                                 <label for="qty_shift" class="col-sm-3 control-label">Days Production</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="qty_prod" placeholder="Production Quantity" required readonly>
+                                    <input type="text" class="form-control" name="qty_actual" id="qty_prod" placeholder="Production Quantity" required readonly>
                                 </div>
                             </div>
                             <div class="form-group">

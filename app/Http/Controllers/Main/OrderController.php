@@ -332,8 +332,8 @@ class OrderController extends Controller
             $insert_id = \DB::table('order_product')->insertGetId($data);
             
         }elseif($type == 'labour'){
-            $cost_monthly = ((str_replace(",", "", $data['cost_head'])/25)*$data['qty']);
-            $amount_monthly = ($data['amount']/25)*$data['qty'];
+            $cost_monthly = ((str_replace(",", "", $data['cost_head'])/25)*($data['qty']*3));
+            $amount_monthly = ($data['amount']/25)*($data['qty']*3);
             
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
             
