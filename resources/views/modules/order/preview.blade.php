@@ -214,28 +214,28 @@
                         <td><b>IDR {{ number_format($o_over->amount,2) }}</b></td>
                     </tr>
                 @endif
-                @if($o_over->profit > 0)
+<!--                @if($o_over->profit > 0)
                     <?php // $profit = ($p_total_cost+$total_cost)*($o_over->profit/100); ?>
                     <tr>
                         <th style="width:50%">Profit Per PCS:</th>
                         <td><b>IDR {{ number_format($o_over->profit,2) }}</b></td>
                     </tr>
-                @endif
+                @endif-->
             @endforeach
             <tr>
                 <td colspan="2">--------------------------------------------------</td>
             </tr>
             <tr>
               <th>Total per PCS:</th>
-              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount+$o_over->profit),2)}}</b></td>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount),2)}}</b></td>
             </tr>
             <tr>
               <th>Monthly:</th>
-              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount+$o_over->profit)*$monthly_qty)}}</b></td>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount)*$monthly_qty)}}</b></td>
             </tr>
             <tr>
               <th>Yearly:</th>
-              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount+$o_over->profit)*($monthly_qty*12))}}</b></td>
+              <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount)*($monthly_qty*12))}}</b></td>
             </tr>
           </table>
         </div>
