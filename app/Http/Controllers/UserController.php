@@ -104,7 +104,22 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['page_title'] = "Edit Users";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => route('index-users'),
+                'title' => 'Users'
+            ],
+            [
+                'action' => '',
+                'title' => 'Edit'
+            ]
+        ]; 
+        
+        $data['user'] = \DB::table('users')->find($id);
+        
+        return view('modules.users.edit', $data);
     }
 
     /**
@@ -116,7 +131,33 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'email|required',
+            'username' => 'required',
+            'password' => 'confirmed'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        
+        $data = $request->except(['_token','password_confirmation','password']);     
+        
+        if($request->password){
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $update = \DB::table('users')->where('id', $id)->update($data);
+        
+        if($update){
+//            $user = \DB::table('users')->find($insert_id);
+//            $user->roles()->attach($request->role_id);
+            
+            return back()->with('success', 'Data user has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**
