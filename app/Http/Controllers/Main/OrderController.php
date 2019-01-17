@@ -231,7 +231,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except(['_token']);        
+        
+        $update = \DB::table('orders')->where('id', $id)->update($data);
+        
+        if($update){
+            
+            return back()->with('success', 'Order has been updated.');
+        }
+        
+        return back()->withInput();
     }
 
     /**

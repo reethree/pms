@@ -7,7 +7,7 @@
       <h3 class="box-title">Form Order</h3>
     </div>
     <!-- /.box-header -->
-    <form class="form-horizontal" action="{{ route('store-order') }}" enctype="multipart/form-data" method="POST">
+    <form class="form-horizontal" action="{{ route('update-order', $order->id) }}" enctype="multipart/form-data" method="POST">
         <div class="box-body">            
             <div class="row">
                 <div class="col-md-6">
