@@ -16,9 +16,13 @@
                   <th style="width: 10px">#</th>
                   <th>Packaging Name</th>
                   <th>Quantity</th>
+                  @if(\Auth::user()->role == 'owner')
                   <th>Packaging Cost</th>
+                  @endif
                   <th>Packaging Amount</th>
+                  @if(\Auth::user()->role == 'owner')
                   <th>Packaging (Cost)<br />per PCS</th>
+                  @endif
                   <th>Packaging (Buffer)<br />per PCS</th>
                   <th></th>
                 </tr>
@@ -28,9 +32,13 @@
                     <td>{{$i}}</td>
                     <td>{{$opak->name}}</td>
                     <td>{{$opak->pack_qty.':'.$opak->prod_qty}}</td>
+                    @if(\Auth::user()->role == 'owner')
                     <td>{{number_format($opak->cost)}}</td>
+                    @endif
                     <td>{{number_format($opak->amount)}}</td>
+                    @if(\Auth::user()->role == 'owner')
                     <td align="center">{{$opak->cost_pcs}}</td>
+                    @endif
                     <td align="center"><b>{{$opak->amount_pcs}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($opak->id, 'packaging'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>

@@ -62,9 +62,11 @@
             <!--<li><a href="#"><i class="fa fa-money-check-alt"></i> Price Calculation</a></li>-->
           </ul>
         </li>
+        @if(\Auth::user()->role == 'owner')
         <li>
             <a href="{{route('index-users')}}"><i class="fa fa-user-lock"></i> <span>Users Management</span></a>
         </li>
+        @endif
         <li>
             <a href="{{route('index-currency')}}"><i class="fa fa-dollar-sign"></i> <span>Currency</span></a>
         </li>

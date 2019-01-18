@@ -19,9 +19,11 @@
                   <th>Efficiency<br />(Buffer)</th>
                   <th>Daily Quantity</th>
                   <th>Monthly Quantity</th>
+                  @if(\Auth::user()->role == 'owner')
                     <th>Mould (Cost)<br />per PCS</th>
                   <th>Machine (Cost)<br />per PCS</th>
                   <th>Material (Cost)<br />per PCS</th>
+                  @endif
                   <th>Mould (Buffer)<br />per PCS</th>
                   <th>Machine (Buffer)<br />per PCS</th>
                   <th>Material (Buffer)<br />per PCS</th>
@@ -36,9 +38,11 @@
                         <td>{{$op->efficiency_buffer.'%'}}</td>
                         <td>{{number_format($op->daily_qty)}}</td>
                         <td>{{number_format($op->quantity)}}</td>
+                        @if(\Auth::user()->role == 'owner')
                         <td align="center">{{$op->mould_cost}}</td>
                         <td align="center">{{$op->machine_cost}}</td>
                         <td align="center">{{$op->material_cost}}</td>
+                        @endif
                         <td align="center"><b>{{$op->mould_buffer}}</b></td>
                         <td align="center"><b>{{$op->machine_buffer}}</b></td>
                         <td align="center"><b>{{$op->material_buffer}}</b></td>
@@ -50,14 +54,18 @@
                         <tr style="background: aquamarine;">
                             <th colspan="3">Machine Name</th>
                             <th colspan="3">Cycle Time</th>
+                            @if(\Auth::user()->role == 'owner')
                             <th colspan="3">Amount (Cost)</th>
+                            @endif
                             <th colspan="3">Amount (Buffer)</th>
                         </tr>
                         @foreach($op->machines as $machine)
                         <tr>
                             <td colspan="3">{{$machine->machine_name}}</td>        
                             <td colspan="3" align="center">{{$machine->cycle_time}}</td>
+                            @if(\Auth::user()->role == 'owner')
                             <td colspan="3">{{number_format($machine->depr_amount)}}</td>
+                            @endif
                             <td colspan="3">{{number_format($machine->amount)}}</td>
                         </tr>
                         @endforeach
@@ -66,14 +74,18 @@
                         <tr style="background: aquamarine;">
                             <th colspan="3">Mould Name</th>
                             <th colspan="3">Cavity</th>
+                            @if(\Auth::user()->role == 'owner')
                             <th colspan="3">Amount (Cost)</th>
+                            @endif
                             <th colspan="3">Amount (Buffer)</th>
                         </tr>
                         @foreach($op->moulds as $mould)
                         <tr>
                             <td colspan="3">{{$mould->mould_name}}</td>
                             <td colspan="3" align="center">{{$mould->cavity}}</td>
+                            @if(\Auth::user()->role == 'owner')
                             <td colspan="3">{{number_format($mould->mould_cost)}}</td>
+                            @endif
                             <td colspan="3">{{number_format($mould->mould_buff)}}</td>
                         </tr>
                         @endforeach  

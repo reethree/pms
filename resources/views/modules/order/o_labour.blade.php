@@ -18,7 +18,9 @@
                   <th>Cost per Month</th>
                   <th>Buffer per Month</th>
                   <th>Days Needed</th>
+                  @if(\Auth::user()->role == 'owner')
                   <th>Labour (Cost)<br />per PCS</th>
+                  @endif
                   <th>Labour (Buffer)<br />per PCS</th>
                   <th></th>
                 </tr>
@@ -30,7 +32,9 @@
                     <td>{{number_format($ol->cost_head)}}</td>
                     <td>{{number_format($ol->amount)}}</td>
                     <td align="center">{{$ol->qty}}</td>
+                    @if(\Auth::user()->role == 'owner')
                     <td align="center">{{$ol->labour_cost}}</td>
+                    @endif
                     <td align="center"><b>{{$ol->labour_pcs}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($ol->id, 'labour'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>

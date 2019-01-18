@@ -94,9 +94,11 @@
             <th>#</th>
             <th>Product Name</th>
             <th>Monthly Qty</th>
+            @if(\Auth::user()->role == 'owner')
             <th>Material Cost</th>
             <th>Mould Cost</th>
             <th>Machine Cost</th>
+            @endif
             <th>Material Price</th>
             <th>Mould Price</th>
             <th>Machine Price</th>
@@ -109,9 +111,11 @@
                       <td>{{$i}}</td>
                       <td>{{$o_prod->product_name}}</td>
                       <td>{{number_format($o_prod->quantity)}}</td>
+                      @if(\Auth::user()->role == 'owner')
                       <td>{{$o_prod->material_cost}}</td>  
                       <td>{{$o_prod->mould_cost}}</td> 
                       <td>{{$o_prod->machine_cost}}</td> 
+                      @endif
                       <td>{{$o_prod->material_buffer}}</td> 
                       <td>{{$o_prod->mould_buffer}}</td>
                       <td>{{$o_prod->machine_buffer}}</td>
@@ -123,10 +127,16 @@
                     ?>
                 @endforeach
                 <tr>
+                    @if(\Auth::user()->role == 'owner')
                     <td colspan="2" align="right"><b>TOTAL COST</b></td>
                     <td colspan="2"><b>({{$p_total_cost}})</b></td>
                     <td colspan="2" align="right"><b>TOTAL PRICE</b></td>
                     <td colspan="2"><b>({{$p_total_price}})</b></td>
+                    @else
+                    <td colspan="5" align="center"><b>TOTAL PRICE</b></td>
+                    <td colspan="2"><b>({{$p_total_price}})</b></td>
+                    @endif
+
                 </tr>
           </tbody>
         </table>
@@ -142,7 +152,9 @@
           <tr>
             <th>#</th>
             <th>Name</th>
+            @if(\Auth::user()->role == 'owner')
             <th>Cost</th>
+            @endif
             <th>Price</th>
           </tr>
           </thead>
@@ -152,7 +164,9 @@
                 <tr>
                   <td>{{$i}}</td>
                   <td>Labour</td>
+                  @if(\Auth::user()->role == 'owner')
                   <td>{{$o_lab->labour_cost}}</td>  
+                  @endif
                   <td>{{$o_lab->labour_pcs}}</td> 
                 </tr>
                 <?php $i++;$total_cost+=$o_lab->labour_cost;$total_price+=$o_lab->labour_pcs;?>
@@ -161,7 +175,9 @@
                 <tr>
                   <td>{{$i}}</td>
                   <td>Electricity</td>
+                  @if(\Auth::user()->role == 'owner')
                   <td>{{$o_ele->pcs}}</td>  
+                  @endif
                   <td>{{$o_ele->pcs}}</td> 
                 </tr>
                 <?php $i++;$total_cost+=$o_ele->pcs;$total_price+=$o_ele->pcs;?>
@@ -170,7 +186,9 @@
                 <tr>
                   <td>{{$i}}</td>
                   <td>Packing ({{$o_pack->name}})</td>
+                  @if(\Auth::user()->role == 'owner')
                   <td>{{$o_pack->cost_pcs}}</td>  
+                  @endif
                   <td>{{$o_pack->amount_pcs}}</td> 
                 </tr>
                 <?php $i++;$total_cost+=$o_pack->cost_pcs;$total_price+=$o_pack->amount_pcs;?>
@@ -179,15 +197,19 @@
                 <tr>
                   <td>{{$i}}</td>
                   <td>Transport</td>
+                  @if(\Auth::user()->role == 'owner')
                   <td>{{$o_trans->cost_pcs}}</td>  
+                  @endif
                   <td>{{$o_trans->amount_pcs}}</td> 
                 </tr>
                 <?php $i++;$total_cost+=$o_trans->cost_pcs;$total_price+=$o_trans->amount_pcs;?>
             @endforeach
             <tr>
-                <td colspan="2" align="center"><b>TOTAL</b></td>
-                <td><b>{{$total_cost}}</b></td>
-                <td><b>{{$total_price}}</b></td>
+                <td colspan="2" align="center"><b>TOTAL PRICE</b></td>
+                @if(\Auth::user()->role == 'owner')
+                <td><b>({{$total_cost}})</b></td>
+                @endif
+                <td><b>({{$total_price}})</b></td>
             </tr>
           </tbody>
         </table>
@@ -197,6 +219,7 @@
     <!-- /.row -->
 
     <div class="row">
+        @if(\Auth::user()->role == 'owner')
       <div class="col-xs-6">
         <p class="lead">COGS</p>
 
@@ -240,6 +263,7 @@
           </table>
         </div>
       </div>
+        @endif
         <div class="col-xs-6">
         <p class="lead">PRICE</p>
 
@@ -289,11 +313,11 @@
     <!-- this row will not appear when printing -->
     <div class="row no-print">
       <div class="col-xs-12">
-        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-        <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment-->
-        </button>
+<!--        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
+        </button>-->
         <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-          <i class="fa fa-download"></i> Generate PDF
+          <i class="fa fa-envelope"></i> SEND EMAIL
         </button>
       </div>
     </div>

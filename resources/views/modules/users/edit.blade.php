@@ -52,6 +52,15 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Role</label>
+                        <div class="col-sm-8">
+                            <select class="form-control select2 select2-hidden-accessible" name="role" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                <option value="owner" @if($user->role == 'owner') selected="selected" @endif>Owner</option>
+                                <option value="admin" @if($user->role == 'admin') selected="selected" @endif>Admin</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6"> 
                     

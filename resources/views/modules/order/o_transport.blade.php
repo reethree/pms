@@ -16,7 +16,9 @@
                   <th style="width: 10px">#</th>
                   <th>Cost per Month</th>
                   <th>Amount per Month</th>
+                  @if(\Auth::user()->role == 'owner')
                   <th>Cost<br />per PCS</th>
+                  @endif
                   <th>Amount (Buffer)<br />per PCS</th>
                   <th></th>
                 </tr>
@@ -26,7 +28,9 @@
                     <td>{{$i}}</td>
                     <td>{{number_format($ot->cost)}}</td>
                     <td>{{number_format($ot->amount)}}</td>
+                    @if(\Auth::user()->role == 'owner')
                     <td align="center">{{$ot->cost_pcs}}</td>
+                    @endif
                     <td align="center"><b>{{$ot->amount_pcs}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($ot->id, 'transport'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
