@@ -385,6 +385,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'preview-order',
             'uses' => 'OrderController@preview'
         ]);
+        Route::get('/order/preview/send-email/{id}', [
+            'as' => 'send-email-order',
+            'uses' => 'OrderController@sendEmail'
+        ]);
 
         // Product Routes
         Route::get('/product', [

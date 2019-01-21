@@ -413,10 +413,65 @@ class OrderController extends Controller
             \DB::table('order_transport')->where('id', $detail_id)->delete();
         }elseif($type == 'overhead'){
             \DB::table('order_overhead')->where('id', $detail_id)->delete();
-        }
-        
+        }       
         
         return back()->with('success', 'Order detail has been deleted.');    
+    }
+    
+    public function sendEmail($id)
+    {
+        $order = \DB::table('orders')->find($id);
+        
+        $order_product = \DB::table('order_product')
+                ->select('order_product.*','products.name as product_name','products.weight_buff','products.efficiency_buffer')
+                ->leftjoin('products', 'order_product.product_id', '=', 'products.id')
+                ->where('order_id', $id)
+                ->get();
+        
+        foreach ($order_product as $op):
+            $data_machines = \DB::table('product_machine')
+                ->select('product_machine.*','machines.name as machine_name')
+                ->leftjoin('machines', 'product_machine.machine_id','=','machines.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $data_moulds = \DB::table('product_mould')
+                ->select('product_mould.*','mould.name as mould_name','mould.no_of_cavity as cavity')
+                ->leftjoin('mould', 'product_mould.mould_id','=','mould.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $op->machines = $data_machines;
+            $op->moulds = $data_moulds;
+        endforeach;
+        
+        $order_labour = \DB::table('order_labour')->where('order_id', $id)->get();
+        $order_electricity = \DB::table('order_electricity')->where('order_id', $id)->get();        
+        $order_packaging = \DB::table('order_packaging')->where('order_id', $id)->get();
+        $order_transport = \DB::table('order_transport')->where('order_id', $id)->get();
+        $order_overhead = \DB::table('order_overhead')->where('order_id', $id)->get();
+
+        $data['order'] = $order;     
+        $data['order_product'] = $order_product;
+        $data['order_labour'] = $order_labour;
+        $data['order_electricity'] = $order_electricity;
+        $data['order_packaging'] = $order_packaging;
+        $data['order_transport'] = $order_transport;
+        $data['order_overhead'] = $order_overhead;
+        
+//        return view('modules.order.email', $data);
+        
+        $email = \Mail::send('modules.order.email', $data, function($message) {
+            $message->from('no-reply@rukamen.com', 'Rukamen');
+            $message->to('reza@contrivent.com','Reza')->subject('Pricing Calculation');
+        });
+        
+//        if($email){
+            return back()->with('success', 'Email has been send.'); 
+//        }
+        
+//        return back()->with('error', 'Ooopps, something wrong please try again.'); 
+        
     }
     
 }

@@ -309,16 +309,50 @@
       </div>
     </div>
     <!-- /.row -->
-
+    @if(\Auth::user()->role == 'owner')
+    <div style="clear: both;"></div>
+    <div class="row" style="display:block;">
+        <hr />
+        <div class="col-xs-6" style="width: 48%;">
+            <p class="lead"><b>TOTAL PROFIT</b></p>
+            <?php
+                $cost_pcs = $p_total_cost+$total_cost+$o_over->amount;
+                $buffer_pcs = $p_total_price+$total_price+$o_over->amount+$o_over->profit;
+                $profit_pcs = $buffer_pcs-$cost_pcs;
+                $profit_margin = ($profit_pcs/$buffer_pcs)*100;
+            ?>
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <td>Profit per PCS:</td>
+              <td style="text-align: right;"><b>{{number_format($profit_pcs,2)}}</b></td>
+            </tr>
+            <tr>
+              <td>Margin:</td>
+              <td style="text-align: right;"><b>{{number_format($profit_margin,2).'%'}}</b></td>
+            </tr>
+            <tr>
+              <td>Monthly:</td>
+              <td style="text-align: right;"><b>{{number_format($profit_pcs*$monthly_qty)}}</b></td>
+            </tr>
+            <tr>
+              <td>Yearly:</td>
+              <td style="text-align: right;"><b>{{number_format($profit_pcs*($monthly_qty*12))}}</b></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    @endif
     <!-- this row will not appear when printing -->
     <div class="row no-print">
       <div class="col-xs-12">
 <!--        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
         <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
         </button>-->
-        <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+        <a href="{{route('send-email-order', $order->id)}}" onclick="return confirm('Are you sure ?')" class="btn btn-primary pull-right" style="margin-right: 5px;">
           <i class="fa fa-envelope"></i> SEND EMAIL
-        </button>
+        </a>
       </div>
     </div>
 </section>
