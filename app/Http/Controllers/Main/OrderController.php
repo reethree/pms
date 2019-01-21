@@ -467,7 +467,7 @@ class OrderController extends Controller
         $data['order_transport'] = $order_transport;
         $data['order_overhead'] = $order_overhead;
         
-        return view('modules.order.email', $data);
+//        return view('modules.order.email', $data);
         
         $email = \Mail::send('modules.order.email', $data, function($message) {
             $message->from('ppms@polimerindo.com', 'P-PMS');
