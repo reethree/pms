@@ -22,7 +22,7 @@
                       <thead>
                       <tr>
                         <th>#</th>
-                        <th>PRODUCT NAME</th>
+                        <th>PRODUCT INFO</th>
                         <th>MONTHLY<br />QUANTITY</th>
                         <th>MATERIAL<br />(Cost)</th>
                         <th>MOULD<br />(Cost)</th>
@@ -37,28 +37,95 @@
                             @foreach($order_product as $o_prod)
                                 <tr>
                                     <td style="text-align: center;">{{$i}}</td>
-                                    <td>{{$o_prod->product_name}}</td>
+                                    <td>
+                                        <b>{{'Customer : '.$o_prod->customer_name}}</b><br /><br />
+                                        {{'Product Name : '.$o_prod->name}}<br />
+                                        {{'Weight Prediction : '.$o_prod->weight_pre.' Gram'}}<br />
+                                        {{'Weight Buffer : '.$o_prod->weight_buff.' Gram'}}<br />
+                                        {{'Efficiency Actual : '.$o_prod->efficiency_actual.'%'}}<br />
+                                        {{'Efficiency Buffer : '.$o_prod->efficiency_buffer.'%'}}
+                                    </td>
                                     <td style="text-align: center;">{{number_format($o_prod->quantity)}}</td>
-                                    <td style="text-align: center;">{{$o_prod->material_cost}}</td>  
-                                    <td style="text-align: center;">{{$o_prod->mould_cost}}</td> 
-                                    <td style="text-align: center;">{{$o_prod->machine_cost}}</td> 
-                                    <td style="text-align: center;">{{$o_prod->material_buffer}}</td> 
-                                    <td style="text-align: center;">{{$o_prod->mould_buffer}}</td>
-                                    <td style="text-align: center;">{{$o_prod->machine_buffer}}</td>
+                                    <td style="text-align: center;"><b>{{$o_prod->material_cost}}</b></td>  
+                                    <td style="text-align: center;"><b>{{$o_prod->mould_cost}}</b></td> 
+                                    <td style="text-align: center;"><b>{{$o_prod->machine_cost}}</b></td> 
+                                    <td style="text-align: center;"><b>{{$o_prod->material_buffer}}</b></td> 
+                                    <td style="text-align: center;"><b>{{$o_prod->mould_buffer}}</b></td>
+                                    <td style="text-align: center;"><b>{{$o_prod->machine_buffer}}</b></td>
                                 </tr>
-                                <?php $i++;
+                                <?php
                                     $p_total_cost+=$o_prod->material_cost+$o_prod->mould_cost+$o_prod->machine_cost;
                                     $p_total_price+=$o_prod->material_buffer+$o_prod->mould_buffer+$o_prod->machine_buffer;
                                     $monthly_qty+=$o_prod->quantity;
                                 ?>
+                                @if(count($o_prod->materials) > 0)
+                                    <tr style="background: aquamarine;">
+                                        <th colspan="2">Material Name</th>
+                                        <th colspan="3">Quantity</th>
+                                        <th colspan="2">Amount (Cost)</th>
+                                        <th colspan="2">Amount (Buffer)</th>
+                                    </tr>
+                                    @foreach($o_prod->materials as $material)
+                                    <tr>
+                                        <td colspan="2">{{$material->material_name}}</td>
+                                        <td colspan="3" style="text-align: center;">{{$material->qty.' Kg'}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($material->cost)}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($material->price)}}</td>
+                                    </tr>
+                                    @endforeach  
+                                @endif
+                                
+                                @if(count($o_prod->moulds) > 0)
+                                    <tr style="background: aquamarine;">
+                                        <th colspan="2">Mould Name</th>
+                                        <th>Cavity</th>
+                                        <th colspan="2">Depreciation</th>
+                                        
+                                        @if(\Auth::user()->role == 'owner')
+                                        <th colspan="2">Amount (Cost)</th>
+                                        @endif
+                                        <th colspan="2">Amount (Buffer)</th>
+                                    </tr>
+                                    @foreach($o_prod->moulds as $mould)
+                                    <tr>
+                                        <td colspan="2">{{$mould->mould_name}}</td>
+                                        <td style="text-align: center;">{{$mould->cavity}}</td>
+                                        <td colspan="2" style="text-align: center;">{{$mould->mould_depr.' Month'}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($mould->mould_cost)}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($mould->mould_buff)}}</td>
+                                    </tr>
+                                    @endforeach  
+                                @endif
+                                
+                                @if(count($o_prod->machines) > 0)
+                                    <tr style="background: aquamarine;">
+                                        <th colspan="2">Machine Name</th>
+                                        <th>Cycle Time</th>
+                                        <th colspan="2">Depreciation</th>
+                                        <th colspan="2">Amount (Cost)</th>
+                                        <th colspan="2">Amount (Buffer)</th>
+                                    </tr>
+                                    @foreach($o_prod->machines as $machine)
+                                    <tr>
+                                        <td colspan="2">{{$machine->machine_name}}</td>   
+                                        <td style="text-align: center;">{{$machine->cycle_time.' Sec'}}</td>
+                                        <td colspan="2" style="text-align: center;">{{$machine->depreciation.' Year'}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($machine->depr_amount)}}</td>
+                                        <td colspan="2" style="text-align: right;">{{number_format($machine->amount)}}</td>
+                                    </tr>
+                                    @endforeach
+                                @endif
+                                <?php $i++;?>
                             @endforeach
                             <tr>
-                                <td colspan="3"><b>TOTAL PRICE</b></td>
+                                <td colspan="9" style="text-align: center;"><b>======================= TOTAL PRICE =======================</b></td>
+                            </tr>
+                            <tr>
                                 <td colspan="2" align="right"><b>COST</b></td>
                                 <td colspan="1" style="text-align: center;"><b>{{$p_total_cost}}</b></td>
+                                <td colspan="2">&nbsp;</td>
                                 <td colspan="2" align="right"><b>BUFFER</b></td>
-                                <td colspan="1" style="text-align: center;"><b>{{$p_total_price}}</b></td>
-
+                                <td colspan="2" style="text-align: center;"><b>{{$p_total_price}}</b></td>
                             </tr>
                       </tbody>
                     </table>

@@ -423,8 +423,9 @@ class OrderController extends Controller
         $order = \DB::table('orders')->find($id);
         
         $order_product = \DB::table('order_product')
-                ->select('order_product.*','products.name as product_name','products.weight_buff','products.efficiency_buffer')
+                ->select('order_product.*','products.*','customer.name as customer_name')
                 ->leftjoin('products', 'order_product.product_id', '=', 'products.id')
+                ->leftjoin('customer', 'products.customer_id', '=', 'customer.id')
                 ->where('order_id', $id)
                 ->get();
         
@@ -441,6 +442,13 @@ class OrderController extends Controller
                 ->where('product_id', $op->product_id)
                 ->get();
             
+            $data_materials = \DB::table('product_material')
+                ->select('product_material.*','materials.name as material_name')
+                ->leftjoin('materials', 'product_material.material_id','=','materials.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $op->materials = $data_materials;
             $op->machines = $data_machines;
             $op->moulds = $data_moulds;
         endforeach;
@@ -459,7 +467,7 @@ class OrderController extends Controller
         $data['order_transport'] = $order_transport;
         $data['order_overhead'] = $order_overhead;
         
-//        return view('modules.order.email', $data);
+        return view('modules.order.email', $data);
         
         $email = \Mail::send('modules.order.email', $data, function($message) {
             $message->from('ppms@polimerindo.com', 'P-PMS');
