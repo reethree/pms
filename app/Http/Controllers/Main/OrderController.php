@@ -462,8 +462,8 @@ class OrderController extends Controller
 //        return view('modules.order.email', $data);
         
         $email = \Mail::send('modules.order.email', $data, function($message) {
-            $message->from('no-reply@rukamen.com', 'Rukamen');
-            $message->to('reza@contrivent.com','Reza')->subject('Pricing Calculation');
+            $message->from('ppms@polimerindo.com', 'P-PMS');
+            $message->to('ppms-pricing@polimerindo.com','Polimerindo')->subject('Pricing Calculation');
         });
         
 //        if($email){
