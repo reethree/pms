@@ -10,7 +10,7 @@
     <form class="form-horizontal" action="{{ route('store-product') }}" enctype="multipart/form-data" method="POST">
         <div class="box-body">            
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Customer</label>
@@ -64,7 +64,13 @@
                           <span class="input-group-addon">%</span>
                           </div>
                       </div>
-                    </div>                    
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Photo</label>
+                        <div class="col-sm-8">
+                          <input type="file" name="photo" class="form-control">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Status</label>
                         <div class="col-sm-8">

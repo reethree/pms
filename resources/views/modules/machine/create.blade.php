@@ -4,7 +4,7 @@
       
 <div class="box box-default">
     <div class="box-header with-border">
-      <h3 class="box-title">Form Material</h3>
+      <h3 class="box-title">Form Machine</h3>
     </div>
     <!-- /.box-header -->
     <form class="form-horizontal" action="{{ route('store-machine') }}" enctype="multipart/form-data" method="POST">

@@ -14,9 +14,9 @@
             <tbody>
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Product Name</th>
-                  <th>Weight<br />(Buffer)</th>
-                  <th>Efficiency<br />(Buffer)</th>
+                  <th>Product Info</th>
+<!--                  <th>Weight<br />(Buffer)</th>
+                  <th>Efficiency<br />(Buffer)</th>-->
                   <th>Daily Quantity</th>
                   <th>Monthly Quantity</th>
                   @if(\Auth::user()->role == 'owner')
@@ -33,9 +33,16 @@
                 @foreach($order_product as $op)
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$op->product_name}}</td>
-                        <td>{{$op->weight_buff}}</td>
-                        <td>{{$op->efficiency_buffer.'%'}}</td>
+                        <td>
+                            Name : {{$op->product_name}}<br />
+                            Weight : {{$op->weight_buff}}<br />
+                            Material Efficiency : {{$op->efficiency_buffer.'%'}}<br /><br />
+                            Cavity : {{$op->cavity}}<br />
+                            Cycle Time : {{$op->cycle_time}}<br />
+                            Time Efficiency : {{$op->efficiency.'%'}}<br />
+                        </td>
+<!--                        <td>{{$op->weight_buff}}</td>
+                        <td>{{$op->efficiency_buffer.'%'}}</td>-->
                         <td>{{number_format($op->daily_qty)}}</td>
                         <td>{{number_format($op->quantity)}}</td>
                         @if(\Auth::user()->role == 'owner')
@@ -52,41 +59,41 @@
                     </tr>
                     @if(count($op->machines) > 0)
                         <tr style="background: aquamarine;">
-                            <th colspan="3">Machine Name</th>
-                            <th colspan="3">Cycle Time</th>
+                            <th colspan="4">Machine Name</th>
+                            <!--<th colspan="3">Cycle Time</th>-->
                             @if(\Auth::user()->role == 'owner')
                             <th colspan="3">Amount (Cost)</th>
                             @endif
-                            <th colspan="3">Amount (Buffer)</th>
+                            <th colspan="4">Amount (Buffer)</th>
                         </tr>
                         @foreach($op->machines as $machine)
                         <tr>
-                            <td colspan="3">{{$machine->machine_name}}</td>        
-                            <td colspan="3" align="center">{{$machine->cycle_time}}</td>
+                            <td colspan="4">{{$machine->machine_name}}</td>        
+                            <!--<td colspan="3" align="center">{{$machine->cycle_time}}</td>-->
                             @if(\Auth::user()->role == 'owner')
                             <td colspan="3">{{number_format($machine->depr_amount)}}</td>
                             @endif
-                            <td colspan="3">{{number_format($machine->amount)}}</td>
+                            <td colspan="4">{{number_format($machine->amount)}}</td>
                         </tr>
                         @endforeach
                     @endif
                     @if(count($op->moulds) > 0)
                         <tr style="background: aquamarine;">
-                            <th colspan="3">Mould Name</th>
-                            <th colspan="3">Cavity</th>
+                            <th colspan="4">Mould Name</th>
+                            <!--<th colspan="3">Cavity</th>-->
                             @if(\Auth::user()->role == 'owner')
                             <th colspan="3">Amount (Cost)</th>
                             @endif
-                            <th colspan="3">Amount (Buffer)</th>
+                            <th colspan="4">Amount (Buffer)</th>
                         </tr>
                         @foreach($op->moulds as $mould)
                         <tr>
-                            <td colspan="3">{{$mould->mould_name}}</td>
-                            <td colspan="3" align="center">{{$mould->cavity}}</td>
+                            <td colspan="4">{{$mould->mould_name}}</td>
+                            <!--<td colspan="3" align="center">{{$mould->cavity}}</td>-->
                             @if(\Auth::user()->role == 'owner')
                             <td colspan="3">{{number_format($mould->mould_cost)}}</td>
                             @endif
-                            <td colspan="3">{{number_format($mould->mould_buff)}}</td>
+                            <td colspan="4">{{number_format($mould->mould_buff)}}</td>
                         </tr>
                         @endforeach  
                     @endif
@@ -125,10 +132,34 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label for="material_qty" class="col-sm-3 control-label">Daily Qty</label>
                                 <div class="col-sm-8">
                                     <input type="text" name="daily_qty" class="form-control" id="daily_qty" placeholder="Daily Quantity Production">                                       
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label for="no_of_cavity" class="col-sm-3 control-label">No. of Cavity</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="cavity" class="form-control" id="cavity" placeholder="Number of Cavity" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Cycle Time</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input type="text" name="cycle_time" class="form-control timepicker" id="cycle_time" placeholder="Cycle Time" required>
+                                        <span class="input-group-addon">Sec</span>                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="efficiency_actual" class="col-sm-3 control-label">Time Efficiency</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                    <input type="number" name="efficiency" class="form-control" id="efficiency_actual"  value="{{$product->efficiency_actual}}" required>
+                                    <span class="input-group-addon">%</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

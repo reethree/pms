@@ -39,19 +39,26 @@
                                     <td style="text-align: center;">{{$i}}</td>
                                     <td>
                                         <b>{{'Customer : '.$o_prod->customer_name}}</b><br /><br />
-                                        {{'Product Name : '.$o_prod->name}}<br />
+                                        <img src="{{ asset("uploads/product/".$o_prod->photo)}}" width="120" /><br />
+<!--                                        {{'Product Name : '.$o_prod->name}}<br />
                                         {{'Weight Prediction : '.$o_prod->weight_pre.' Gram'}}<br />
                                         {{'Weight Buffer : '.$o_prod->weight_buff.' Gram'}}<br />
                                         {{'Efficiency Actual : '.$o_prod->efficiency_actual.'%'}}<br />
-                                        {{'Efficiency Buffer : '.$o_prod->efficiency_buffer.'%'}}
+                                        {{'Efficiency Buffer : '.$o_prod->efficiency_buffer.'%'}}-->
+                                        Name : {{$o_prod->name}}<br />
+                                        Weight (Buffer): {{$o_prod->weight_buff}}<br />
+                                        Material Efficiency : {{$o_prod->efficiency_buffer.'%'}}<br /><br />
+                                        Cavity : {{$o_prod->cavity}}<br />
+                                        Cycle Time : {{$o_prod->cycle_time}}<br />
+                                        Time Efficiency : {{$o_prod->efficiency.'%'}}<br />
                                     </td>
-                                    <td style="text-align: center;">{{number_format($o_prod->quantity)}}</td>
-                                    <td style="text-align: center;"><b>{{$o_prod->material_cost}}</b></td>  
-                                    <td style="text-align: center;"><b>{{$o_prod->mould_cost}}</b></td> 
-                                    <td style="text-align: center;"><b>{{$o_prod->machine_cost}}</b></td> 
-                                    <td style="text-align: center;"><b>{{$o_prod->material_buffer}}</b></td> 
-                                    <td style="text-align: center;"><b>{{$o_prod->mould_buffer}}</b></td>
-                                    <td style="text-align: center;"><b>{{$o_prod->machine_buffer}}</b></td>
+                                    <td style="vertical-align: middle;text-align: center;">{{number_format($o_prod->quantity)}}</td>
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->material_cost}}</b></td>  
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->mould_cost}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->machine_cost}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->material_buffer}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->mould_buffer}}</b></td>
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->machine_buffer}}</b></td>
                                 </tr>
                                 <?php
                                     $p_total_cost+=$o_prod->material_cost+$o_prod->mould_cost+$o_prod->machine_cost;
@@ -168,7 +175,7 @@
                         @foreach($order_packaging as $o_pack)
                             <tr>
                               <td style="text-align: center;">{{$i}}</td>
-                              <td>Packing ({{$o_pack->name}})</td>
+                              <td>Packaging ({{$o_pack->name}})</td>
                               <td style="text-align: center;">{{$o_pack->cost_pcs}}</td>  
                               <td style="text-align: center;">{{$o_pack->amount_pcs}}</td> 
                             </tr>
@@ -224,8 +231,8 @@
                         <tr>
                             <td colspan="2">&nbsp;</td>
                         </tr>
-                        <tr>
-                          <td>Total per PCS:</td>
+                        <tr style="font-size: 18px;">
+                          <td>Total COST per PCS:</td>
                           <td style="text-align: right;"><b>{{number_format(($p_total_cost+$total_cost+$o_over->amount),2)}}</b></td>
                         </tr>
                         <tr>
@@ -267,8 +274,8 @@
                         <tr>
                             <td colspan="2">&nbsp;</td>
                         </tr>
-                        <tr>
-                          <td>Total per PCS:</td>
+                        <tr style="font-size: 18px;">
+                          <td>Selling Price per PCS:</td>
                           <td style="text-align: right;"><b>{{number_format(($p_total_price+$total_price+$o_over->amount+$o_over->profit),2)}}</b></td>
                         </tr>
                         <tr>

@@ -2,41 +2,6 @@
 
 @section('content')
 <?php $overhead = 0;$overhead_price = 0;$profile = 0;$profile_price = 0;?>
-<!--<div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h3 class="box-title">Orders Preview</h3>
-        </div>
-         /.box-header 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                    <tr>
-                        <th>#</th>
-                        <th align='center' style="text-align: center;">Name</th>
-                        <th align='center' style="text-align: center;">Material Cost</th>
-                        <th align='center' style="text-align: center;">Material Buffer</th>
-                    </tr>
-                    <?php $i = 1;?>
-                    @foreach($order_product as $o_prod)
-                        <tr>
-                          <td align='center'>{{$i}}</td>
-                          <td align='center'>{{$o_prod->product_name}}</td>
-                          <td align='center'>{{$o_prod->material_cost}}</td>  
-                          <td align='center'>{{$o_prod->material_buffer}}</td> 
-                        </tr>
-                        <?php $i++;?>
-                    @endforeach
-                  </table>
-                </div>
-            </div>
-        </div>
-      </div>
-       /.box 
-    </div>
-</div>-->
 
 <section class="invoice">
     <!-- title row -->
@@ -50,40 +15,6 @@
       </div>
       <!-- /.col -->
     </div>
-    <!-- info row -->
-<!--    <div class="row invoice-info">
-      <div class="col-sm-4 invoice-col">
-        From
-        <address>
-          <strong>Admin, Inc.</strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          Phone: (804) 123-5432<br>
-          Email: info@almasaeedstudio.com
-        </address>
-      </div>
-       /.col 
-      <div class="col-sm-4 invoice-col">
-        To
-        <address>
-          <strong>John Doe</strong><br>
-          795 Folsom Ave, Suite 600<br>
-          San Francisco, CA 94107<br>
-          Phone: (555) 539-1037<br>
-          Email: john.doe@example.com
-        </address>
-      </div>
-       /.col 
-      <div class="col-sm-4 invoice-col">
-        <b>Invoice #007612</b><br>
-        <br>
-        <b>Order ID:</b> 4F3S8J<br>
-        <b>Payment Due:</b> 2/22/2014<br>
-        <b>Account:</b> 968-34567
-      </div>
-       /.col 
-    </div>-->
-    <!-- /.row -->
 
     <!-- Table row -->
     <div class="row">
@@ -92,16 +23,16 @@
           <thead>
           <tr>
             <th>#</th>
-            <th>Product Name</th>
+            <th>Product Info</th>
             <th>Monthly Qty</th>
             @if(\Auth::user()->role == 'owner')
             <th>Material Cost</th>
             <th>Mould Cost</th>
             <th>Machine Cost</th>
             @endif
-            <th>Material Price</th>
-            <th>Mould Price</th>
-            <th>Machine Price</th>
+            <th>Material Buffer</th>
+            <th>Mould Buffer</th>
+            <th>Machine Buffer</th>
           </tr>
           </thead>
           <tbody>
@@ -109,16 +40,31 @@
                 @foreach($order_product as $o_prod)
                     <tr>
                       <td>{{$i}}</td>
-                      <td>{{$o_prod->product_name}}</td>
-                      <td>{{number_format($o_prod->quantity)}}</td>
+                      <td>
+                            <b>{{'Customer : '.$o_prod->customer_name}}</b><br /><br />
+                            <img src="{{ asset("uploads/product/".$o_prod->photo)}}" width="120" />
+                            <br />
+                            Name : {{$o_prod->name}}<br />
+                            Weight : {{$o_prod->weight_buff}}<br />
+                            Material Efficiency : {{$o_prod->efficiency_buffer.'%'}}<br /><br />
+                            Cavity : {{$o_prod->cavity}}<br />
+                            Cycle Time : {{$o_prod->cycle_time}}<br />
+                            Time Efficiency : {{$o_prod->efficiency.'%'}}<br />
+<!--                            {{'Product Name : '.$o_prod->name}}<br />
+                            {{'Weight Prediction : '.$o_prod->weight_pre.' Gram'}}<br />
+                            {{'Weight Buffer : '.$o_prod->weight_buff.' Gram'}}<br />
+                            {{'Efficiency Actual : '.$o_prod->efficiency_actual.'%'}}<br />
+                            {{'Efficiency Buffer : '.$o_prod->efficiency_buffer.'%'}}-->
+                      </td>
+                      <td style="vertical-align: middle;">{{number_format($o_prod->quantity)}}</td>
                       @if(\Auth::user()->role == 'owner')
-                      <td>{{$o_prod->material_cost}}</td>  
-                      <td>{{$o_prod->mould_cost}}</td> 
-                      <td>{{$o_prod->machine_cost}}</td> 
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->material_cost}}</td>  
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->mould_cost}}</td> 
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->machine_cost}}</td> 
                       @endif
-                      <td>{{$o_prod->material_buffer}}</td> 
-                      <td>{{$o_prod->mould_buffer}}</td>
-                      <td>{{$o_prod->machine_buffer}}</td>
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->material_buffer}}</td> 
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->mould_buffer}}</td>
+                      <td style="vertical-align: middle;text-align: center;">{{$o_prod->machine_buffer}}</td>
                     </tr>
                     <?php $i++;
                         $p_total_cost+=$o_prod->material_cost+$o_prod->mould_cost+$o_prod->machine_cost;
@@ -129,12 +75,12 @@
                 <tr>
                     @if(\Auth::user()->role == 'owner')
                     <td colspan="2" align="right"><b>TOTAL COST</b></td>
-                    <td colspan="2"><b>({{$p_total_cost}})</b></td>
+                    <td colspan="2"><b>{{$p_total_cost}}</b></td>
                     <td colspan="2" align="right"><b>TOTAL PRICE</b></td>
-                    <td colspan="2"><b>({{$p_total_price}})</b></td>
+                    <td colspan="2"><b>{{$p_total_price}}</b></td>
                     @else
                     <td colspan="5" align="center"><b>TOTAL PRICE</b></td>
-                    <td colspan="2"><b>({{$p_total_price}})</b></td>
+                    <td colspan="2"><b>{{$p_total_price}}</b></td>
                     @endif
 
                 </tr>
@@ -185,7 +131,7 @@
             @foreach($order_packaging as $o_pack)
                 <tr>
                   <td>{{$i}}</td>
-                  <td>Packing ({{$o_pack->name}})</td>
+                  <td>Packaging ({{$o_pack->name}})</td>
                   @if(\Auth::user()->role == 'owner')
                   <td>{{$o_pack->cost_pcs}}</td>  
                   @endif
@@ -248,7 +194,7 @@
             <tr>
                 <td colspan="2">--------------------------------------------------</td>
             </tr>
-            <tr>
+            <tr style="font-size: 18px;">
               <th>Total per PCS:</th>
               <td><b>IDR {{number_format(($p_total_cost+$total_cost+$o_over->amount),2)}}</b></td>
             </tr>
@@ -292,7 +238,7 @@
             <tr>
                 <td colspan="2">--------------------------------------------------</td>
             </tr>
-            <tr>
+            <tr style="font-size: 18px;">
               <th>Total per PCS:</th>
               <td><b>IDR {{number_format(($p_total_price+$total_price+$o_over->amount+$o_over->profit),2)}}</b></td>
             </tr>
@@ -323,7 +269,7 @@
             ?>
         <div class="table-responsive">
           <table class="table">
-            <tr>
+            <tr style="font-size: 18px;">
               <td>Profit per PCS:</td>
               <td style="text-align: right;"><b>{{number_format($profit_pcs,2)}}</b></td>
             </tr>

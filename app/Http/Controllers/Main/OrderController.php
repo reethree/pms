@@ -62,8 +62,9 @@ class OrderController extends Controller
         $order = \DB::table('orders')->find($id);
         
         $order_product = \DB::table('order_product')
-                ->select('order_product.*','products.name as product_name','products.weight_buff','products.efficiency_buffer')
+                ->select('order_product.*','products.*','customer.name as customer_name')
                 ->leftjoin('products', 'order_product.product_id', '=', 'products.id')
+                ->leftjoin('customer', 'products.customer_id', '=', 'customer.id')
                 ->where('order_id', $id)
                 ->get();
         
@@ -328,6 +329,8 @@ class OrderController extends Controller
             $data['mould_cost'] = round($mould_cost, 2);
             $data['machine_cost'] = round($machine_cost, 2);
             $data['material_cost'] = round($material_cost, 2);
+            
+            $data['daily_qty'] = ((86400 / $data['cycle_time']) * $data['cavity']) * ($data['cavity']/100);
 
             $insert_id = \DB::table('order_product')->insertGetId($data);
             

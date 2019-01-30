@@ -43,6 +43,13 @@ class ProductController extends Controller
                     return '<a href="'.route('edit-product', $product->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
                     . '&nbsp;<a href="'.route('delete-product', $product->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
                 })
+                ->addColumn('image', function ($product) {
+                    if($product->photo):
+                        return '<img src="'.asset("uploads/product/".$product->photo).'" width="120" />';
+                    else:
+                        return 'No Photo';
+                    endif;
+                })
                 ->editColumn('weight_pre', function ($product) {
                     return $product->weight_pre.' Gram';
                 })
@@ -58,6 +65,7 @@ class ProductController extends Controller
                 ->editColumn('status', function ($product) {
                     return ucfirst($product->status);
                 })
+                ->rawColumns(['image', 'action'])
                 ->make(true);
     }
     
@@ -96,6 +104,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
+
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/product';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
         
         $insert_id = \DB::table('products')->insertGetId($data);
         
@@ -205,7 +223,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except(['_token']);        
+        $data = $request->except(['_token']);    
+        
+        if ($request->hasFile('photo')) {            
+            $file = $request->file('photo');
+            $filename = $file->getClientOriginalName();
+            
+            $destinationPath = base_path() . '/public/uploads/product';
+            $file->move($destinationPath, $filename);
+            
+            $data['photo'] = $filename;  
+        }
         
         $update = \DB::table('products')->where('id',$id)->update($data);
         

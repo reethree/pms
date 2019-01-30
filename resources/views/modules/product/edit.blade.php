@@ -11,7 +11,7 @@
             <form class="form-horizontal" action="{{ route('update-product', $product->id) }}" enctype="multipart/form-data" method="POST">
                 <div class="box-body">            
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Customer</label>
@@ -49,7 +49,7 @@
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label for="efficiency_actual" class="col-sm-4 control-label">Efficiency (Actual)</label>
+                                <label for="efficiency_actual" class="col-sm-4 control-label">Material Efficiency (Actual)</label>
                                 <div class="col-sm-4">
                                     <div class="input-group">
                                     <input type="number" name="efficiency_actual" class="form-control" id="efficiency_actual"  value="{{$product->efficiency_actual}}" required>
@@ -58,7 +58,7 @@
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label for="efficiency_buffer" class="col-sm-4 control-label">Efficiency (Buffer)</label>
+                                <label for="efficiency_buffer" class="col-sm-4 control-label">Material Efficiency (Buffer)</label>
                                 <div class="col-sm-4">
                                     <div class="input-group">
                                         <input type="number" name="efficiency_buffer" class="form-control" id="efficiency_buffer" value="{{$product->efficiency_buffer}}" required>
@@ -66,6 +66,12 @@
                                     </div>
                                 </div>
                               </div> 
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Photo</label>
+                                <div class="col-sm-8">
+                                    <input type="file" name="photo" class="form-control">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Status</label>
                                 <div class="col-sm-8">

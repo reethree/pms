@@ -24,6 +24,7 @@
               <thead>
                 <tr>
                     <th>#</th>
+                    <th>Image</th>
                     <th>Customer</th>
                     <th>Name</th>
                     <th>Monthly Qty</th>
@@ -56,6 +57,7 @@
         ajax: '{{route("getProductTable")}}',
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'image', name: 'image', orderable: false, searchable: false},
             {data: 'customer_name', name: 'customer_name', searchable: false},
             {data: 'name', name: 'name'},
             {data: 'monthly_qty', name: 'monthly_qty'},
