@@ -155,12 +155,12 @@
                                     <td style="text-align: center;">{{$i}}</td>
                                     <td>{{$o_prod->name}}</td>
                                     <td style="vertical-align: middle;text-align: center;">{{number_format($o_prod->quantity)}}</td>
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->material_cost}}</b></td>  
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->mould_cost}}</b></td> 
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->machine_cost}}</b></td> 
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->material_buffer}}</b></td> 
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->mould_buffer}}</b></td>
-                                    <td style="vertical-align: middle;text-align: center;"><b>{{$o_prod->machine_buffer}}</b></td>
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->material_cost, 2)}}</b></td>  
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->mould_cost, 2)}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->machine_cost, 2)}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->material_buffer, 2)}}</b></td> 
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->mould_buffer, 2)}}</b></td>
+                                    <td style="vertical-align: middle;text-align: center;"><b>{{number_format($o_prod->machine_buffer, 2)}}</b></td>
                                 </tr>
                                 <?php
                                     $p_total_cost+=$o_prod->material_cost+$o_prod->mould_cost+$o_prod->machine_cost;
@@ -227,14 +227,14 @@
                                 <?php $i++;?>
                             @endforeach
                             <tr>
-                                <td colspan="9" style="text-align: center;"><b>======================= TOTAL PRICE =======================</b></td>
+                                <td colspan="9" style="text-align: center;"><b>======================= TOTAL =======================</b></td>
                             </tr>
                             <tr>
                                 <td colspan="2" align="right"><b>COST</b></td>
-                                <td colspan="1" style="text-align: center;"><b>{{$p_total_cost}}</b></td>
+                                <td colspan="1" style="text-align: center;"><b>{{number_format($p_total_cost, 2)}}</b></td>
                                 <td colspan="2">&nbsp;</td>
                                 <td colspan="2" align="right"><b>BUFFER</b></td>
-                                <td colspan="2" style="text-align: center;"><b>{{$p_total_price}}</b></td>
+                                <td colspan="2" style="text-align: center;"><b>{{number_format($p_total_price, 2)}}</b></td>
                             </tr>
                       </tbody>
                     </table>
