@@ -269,10 +269,10 @@
                             <tr>
                               <td style="text-align: center;">{{$i}}</td>
                               <td>Electricity</td>
-                              <td style="text-align: center;">{{$o_ele->pcs}}</td>  
+                              <td style="text-align: center;">{{$o_ele->pcs_cost}}</td>  
                               <td style="text-align: center;">{{$o_ele->pcs}}</td> 
                             </tr>
-                            <?php $i++;$total_cost+=$o_ele->pcs;$total_price+=$o_ele->pcs;?>
+                            <?php $i++;$total_cost+=$o_ele->pcs_cost;$total_price+=$o_ele->pcs;?>
                         @endforeach
                         @foreach($order_packaging as $o_pack)
                             <tr>
