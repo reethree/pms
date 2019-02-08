@@ -17,9 +17,10 @@
                   <th>Year</th>
                   <th>Total Machine</th>
                   <th>Days Needed</th>
-                  <th>Average per Month</th>
-                  <th>Amount</th>
-                  <th>Electricity (Buffer)<br />per PCS</th>
+                  <th>Cost Amount</th>
+                  <th>Buffer Amount</th>
+                  <th>Cost<br />per PCS</th>
+                  <th>Buffer<br />per PCS</th>
                   <th></th>
                 </tr>
                 <?php $i = 1;?>
@@ -29,8 +30,9 @@
                     <td>{{$oe->year}}</td>
                     <td align="center">{{number_format($oe->total_machine)}}</td>
                     <td align="center">{{number_format($oe->days_needed)}}</td>
-                    <td>{{number_format($oe->avg_bill)}}</td>
+                    <td>{{number_format($oe->cost_amount)}}</td>
                     <td>{{number_format($oe->amount)}}</td>
+                    <td align="center"><b>{{$oe->pcs_cost}}</b></td>
                     <td align="center"><b>{{$oe->pcs}}</b></td>
                     <td align="center">
                         <a href="{{route('delete-order-detail', array($oe->id, 'electricity'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
