@@ -56,6 +56,7 @@ class MouldController extends Controller
                 ->editColumn('status', function ($mould) {
                     return ucfirst($mould->status);
                 })
+                ->rawColumns(['image', 'action'])
                 ->make(true);
     }
     
