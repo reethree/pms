@@ -112,11 +112,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Cost per Month</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="cost_amount" class="form-control" id="cost_amount" placeholder="Cost" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="amount" class="col-sm-3 control-label">Buffer per Month</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control" id="amount_electricity" placeholder="Amount" required>
+                                    <input type="text" name="amount" class="form-control" id="amount_electricity" placeholder="Buffer" required>
                                     </div>
                                 </div>
                             </div>

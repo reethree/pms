@@ -16,7 +16,7 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Name</th>
-                      <th>CT</th>
+                      <!--<th>CT</th>-->
                       <th>Cost</th>
                       <th>Depr (Year)</th>
                       <th>Amount (Buffer)</th>
@@ -27,7 +27,7 @@
                     <tr>
                       <td>{{$i}}</td>
                       <td>{{$product_machine->machine_name}}</td>        
-                      <td>{{$product_machine->cycle_time}}</td>
+                      <!--<td>{{$product_machine->cycle_time}}</td>-->
                       <td>{{number_format($product_machine->depr_amount)}}</td>
                       <td align="center">{{$product_machine->depreciation}}</td>
                       <td>{{number_format($product_machine->amount)}}</td>
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <label class="col-sm-3 control-label">Cycle Time</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
@@ -120,7 +120,7 @@
                                         <span class="input-group-addon">Sec</span>                                    
                                     </div>
                                 </div>
-                            </div> 
+                            </div> -->
                         </div>
                     </div>
                 </div>

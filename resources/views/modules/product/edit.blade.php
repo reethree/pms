@@ -72,6 +72,7 @@
                                     <input type="file" name="photo" class="form-control">
                                 </div>
                             </div>
+                            <div class="col-sm-12" style="text-align: center;"><img src="{{asset("uploads/product/".$product->photo)}}" width="200" /></div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Status</label>
                                 <div class="col-sm-8">

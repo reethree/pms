@@ -362,8 +362,10 @@ class OrderController extends Controller
             $data['avg_bill'] = str_replace(',', '', $data['avg_bill']);
             
             $pcs = (($data['amount']/25)/$data['total_machine'])*$data['days_needed'];
+            $pcs_cost = (($data['cost_amount']/25)/$data['total_machine'])*$data['days_needed'];
             
             $data['pcs'] = round($pcs/$sum_product_qty, 2);
+            $data['pcs_cost'] = round($pcs_cost/$sum_product_qty, 2);
             
             $insert_id = \DB::table('order_electricity')->insertGetId($data);  
             
@@ -470,7 +472,7 @@ class OrderController extends Controller
         $data['order_transport'] = $order_transport;
         $data['order_overhead'] = $order_overhead;
         
-//        return view('modules.order.email', $data);
+        return view('modules.order.email', $data);
         
         $email = \Mail::send('modules.order.email', $data, function($message) {
             $message->from('ppms@polimerindo.com', 'P-PMS');
