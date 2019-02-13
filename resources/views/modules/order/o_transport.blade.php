@@ -14,8 +14,8 @@
             <tbody>
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Cost per Month</th>
-                  <th>Amount per Month</th>
+                  <th>Cost Total</th>
+                  <th>Amount Total</th>
                   @if(\Auth::user()->role == 'owner')
                   <th>Cost<br />per PCS</th>
                   @endif
@@ -62,20 +62,20 @@
                         <div class="col-md-12">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Cost per Month</label>
+                                <label class="col-sm-3 control-label">Cost total</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="cost" class="form-control" placeholder="Cost per Month" required>
+                                    <input type="text" name="cost" class="form-control money" placeholder="Cost Total Transport" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Buffer per Month</label>
+                                <label class="col-sm-3 control-label">Buffer total</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control" placeholder="Amount per Month" required>
+                                    <input type="text" name="amount" class="form-control money" placeholder="Amount Total Transport" required>
                                     </div>
                                 </div>
                             </div>

@@ -72,7 +72,7 @@ class LabourController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
-        
+        $data['weekly_wages'] = str_replace(',', '', $data['weekly_wages']);
         $insert_id = \DB::table('labour')->insertGetId($data);
         
         if($insert_id){
@@ -114,7 +114,7 @@ class LabourController extends Controller
                 'title' => 'Edit'
             ]
         ]; 
-        
+        $data['weekly_wages'] = str_replace(',', '', $data['weekly_wages']);
         $data['labour'] = \DB::table('labour')->find($id);
 
         return view('modules.labour.edit', $data);

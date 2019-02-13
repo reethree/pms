@@ -108,7 +108,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="number" name="amount" class="form-control" id="machine_buff" placeholder="Amount" required>
+                                    <input type="text" name="amount" class="form-control money" id="machine_buff" placeholder="Amount" required>
                                     </div>
                                 </div>
                             </div>

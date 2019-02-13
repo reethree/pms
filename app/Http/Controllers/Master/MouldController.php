@@ -95,7 +95,6 @@ class MouldController extends Controller
         if(!isset($data['depreciation'])){
             $data['depreciation'] = 0;
         }
-        $insert_id = \DB::table('mould')->insertGetId($data);
         
         if ($request->hasFile('photo')) {            
             $file = $request->file('photo');
@@ -106,7 +105,9 @@ class MouldController extends Controller
             
             $data['photo'] = $filename;  
         }
-        
+        $data['price'] = str_replace(',', '', $data['price']);
+        $insert_id = \DB::table('mould')->insertGetId($data);
+
         if($insert_id){
             
             return back()->with('success', 'Mould has been added.');
@@ -175,7 +176,7 @@ class MouldController extends Controller
             
             $data['photo'] = $filename;  
         }
-        
+        $data['price'] = str_replace(',', '', $data['price']);
         $update = \DB::table('mould')->where('id',$id)->update($data);
         
         if($update){

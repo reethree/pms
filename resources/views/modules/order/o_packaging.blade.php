@@ -96,7 +96,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="number" name="cost" class="form-control" id="pack_cost" placeholder="Packaging Cost" required>
+                                    <input type="text" name="cost" class="form-control money" id="pack_cost" placeholder="Packaging Cost" required>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="number" name="amount" class="form-control" id="pack_amount" placeholder="Packaging Amount" required>
+                                    <input type="text" name="amount" class="form-control money" id="pack_amount" placeholder="Packaging Amount" required>
                                     </div>
                                 </div>
                             </div>

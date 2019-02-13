@@ -140,8 +140,10 @@ class MaterialController extends Controller
             // Insert Price
             $data_price['material_id'] = $insert_id;
             $data_price['currency'] = $data['currency'];
-            $data_price['price'] = $data['price'];
-            $data_price['rate'] = $data['rate'];
+//            $data_price['price'] = $data['price'];
+//            $data_price['rate'] = $data['rate'];
+            $data['price'] = str_replace(',', '', $data['price']);
+            $data['rate'] = str_replace(',', '', $data['rate']);
             $data_price['date'] = $date_price;
             
             $insert_price = \DB::table('material_price')->insertGetId($data_price);
@@ -274,7 +276,8 @@ class MaterialController extends Controller
     {
         $date_price = $request->date_price;
         $data = $request->except(['_token','date_price']);        
-        
+        $data['price'] = str_replace(',', '', $data['price']);
+        $data['rate'] = str_replace(',', '', $data['rate']);
         $update = \DB::table('materials')->where('id', $id)->update($data);
         
         if($update){
@@ -282,16 +285,17 @@ class MaterialController extends Controller
             $data_price['material_id'] = $id;
             $data_price['currency'] = $data['currency'];
             $data_price['price'] = $data['price'];
+            $data_price['rate'] = $data['rate'];
             $data_price['date'] = $date_price;
             
             $insert_id = \DB::table('material_price')->insertGetId($data_price);
             
             if($insert_id){
                 // Update Group
-                $price = $data['price'];
+                $price = $data_price['price'];
                 if($data['currency'] != 'IDR'){
-                    $rate = $this->getCurrencyByName($data['currency']);
-                    $price = $data['price'] * $rate;
+//                    $rate = $this->getCurrencyByName($data['currency']);
+                    $price = $data_price['price'] * $data_price['rate'];
                 }
                 $update = \DB::table('material_group')->where('material_id', $id)->update(['price' => $price]);
                 

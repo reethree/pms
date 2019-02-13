@@ -44,8 +44,6 @@
 @include('modules.order.o_packaging')
 
 @include('modules.order.o_transport')
-
-@include('modules.order.o_overhead')
     
 @endsection
 
@@ -105,7 +103,7 @@
                 $('#cost_per_shift').val(json.shift_labour);
                 $('#cost_head').val(json.avg_labour);
                 $('#cost_head_day').val(json.cost_head_day);
-                $('#qty_prod').val(json.qty_prod);
+                $('.qty_prod').val(json.qty_prod);
             }
         });
     });
@@ -127,7 +125,9 @@
                 console.log(json);
                 $('#max_bill').val(json.max_bill);
                 $('#min_bill').val(json.min_bill);
-                $('#avg_bill').val(json.avg_bill);
+                $('#avg_bill,#cost_amount_electricity').val(json.avg_bill);
+                
+                $('#total_machine').val(json.total_machine);
             }
         });
     });

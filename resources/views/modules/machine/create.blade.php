@@ -29,7 +29,7 @@
                       <div class="col-sm-8">
                           <div class="input-group">
                             <span class="input-group-addon">IDR</span>
-                            <input type="number" name="price" class="form-control" id="price" placeholder="Price" required>
+                            <input type="text" name="price" class="form-control money" id="price" placeholder="Price" required>
                           </div>
                       </div>
                     </div>

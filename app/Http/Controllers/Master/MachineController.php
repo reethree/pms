@@ -108,7 +108,7 @@ class MachineController extends Controller
             
             $data['photo'] = $filename;  
         }
-        
+        $data['price'] = str_replace(',', '', $data['price']);
         $insert_id = \DB::table('machines')->insertGetId($data);
         
         if($insert_id){
@@ -179,7 +179,7 @@ class MachineController extends Controller
             
             $data['photo'] = $filename;  
         }
-        
+        $data['price'] = str_replace(',', '', $data['price']);
         $update = \DB::table('machines')->where('id',$id)->update($data);
         
         if($update){

@@ -268,12 +268,14 @@ class ProductController extends Controller
             $data['mould_cost'] = str_replace(',', '', $request->mould_cost);           
 //            $qty = $product->monthly_qty * 12;
 //            $data['mould_pcs'] = $data['mould_buff'] / $qty;
-            
+            $data['mould_buff'] = str_replace(',', '', $data['mould_buff']);
             $insert_id = \DB::table('product_mould')->insertGetId($data);
         }elseif($type == 'machine'){
+            $data['amount'] = str_replace(',', '', $data['amount']);
             $data['depr_amount'] = $data['cost']/$data['depreciation'];
             $insert_id = \DB::table('product_machine')->insertGetId($data);
         }elseif($type == 'material'){
+            $data['price'] = str_replace(',', '', $data['price']);
             if(isset($data['product_material_id'])){
                 $insert_id = \DB::table('product_material')->where('id',$data['product_material_id'])->update(['price'=>$data['price'],'qty'=>$data['qty']]);
             }else{

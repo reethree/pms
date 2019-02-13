@@ -18,7 +18,7 @@
                       <div class="col-sm-8">
                           <div class="input-group">
                             <span class="input-group-addon">IDR</span>
-                            <input type="number" name="monthly_revenue" class="form-control" id="monthly_revenue" placeholder="Monthly Update" required>
+                            <input type="text" name="monthly_revenue" class="form-control money" id="monthly_revenue" placeholder="Monthly Update" required>
                           </div>
                       </div>
                     </div>

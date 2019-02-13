@@ -18,7 +18,7 @@
                       <div class="col-sm-8">
                           <div class="input-group">
                             <span class="input-group-addon">IDR</span>
-                            <input type="number" name="monthly_bill" class="form-control" id="monthly_bill" placeholder="Monthly Bill" required value='{{$electricity->monthly_bill}}'>
+                            <input type="text" name="monthly_bill" class="form-control money" id="monthly_bill" placeholder="Monthly Bill" required value='{{$electricity->monthly_bill}}'>
                           </div>
                       </div>
                     </div>

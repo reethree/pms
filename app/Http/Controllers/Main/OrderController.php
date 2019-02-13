@@ -330,11 +330,12 @@ class OrderController extends Controller
             $data['machine_cost'] = round($machine_cost, 2);
             $data['material_cost'] = round($material_cost, 2);
             
-            $data['daily_qty'] = ((86400 / $data['cycle_time']) * $data['cavity']) * ($data['cavity']/100);
+            $data['daily_qty'] = ((86400 / $data['cycle_time']) * $data['cavity']) * ($data['efficiency']/100);
 
             $insert_id = \DB::table('order_product')->insertGetId($data);
             
         }elseif($type == 'labour'){
+            $data['amount'] = str_replace(',','',$data['amount']);
             $cost_monthly = ((str_replace(",", "", $data['cost_head'])/25)*($data['qty']*3));
             $amount_monthly = ($data['amount']/25)*($data['qty']*3);
             
@@ -361,8 +362,11 @@ class OrderController extends Controller
             $data['min_bill'] = str_replace(',', '', $data['min_bill']);
             $data['avg_bill'] = str_replace(',', '', $data['avg_bill']);
             
+            $data['amount'] = str_replace(',', '', $data['amount']);
+            $data['cost_amount'] = str_replace(',', '', $data['cost_amount']);
+            
             $pcs = (($data['amount']/25)/$data['total_machine'])*$data['days_needed'];
-            $pcs_cost = (($data['cost_amount']/25)/$data['total_machine'])*$data['days_needed'];
+            $pcs_cost = (($data['cost_amount']/25)/$data['total_machine'])*$data['qty_actual'];
             
             $data['pcs'] = round($pcs/$sum_product_qty, 2);
             $data['pcs_cost'] = round($pcs_cost/$sum_product_qty, 2);
@@ -372,6 +376,8 @@ class OrderController extends Controller
         }elseif($type == 'packaging'){
             $data['order_id'] = $order_id;
             $qty = $data['pack_qty']*$data['prod_qty'];
+            $data['cost'] = str_replace(',', '', $data['cost']);
+            $data['amount'] = str_replace(',', '', $data['amount']);
             
             $data['cost_pcs'] = round($data['cost']/$qty, 2);
             $data['amount_pcs'] = round($data['amount']/$qty, 2);
@@ -380,20 +386,22 @@ class OrderController extends Controller
         }elseif($type == 'transport'){
             $data['order_id'] = $order_id;
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
+            $data['cost'] = str_replace(',', '', $data['cost']);
+            $data['amount'] = str_replace(',', '', $data['amount']);
             
             $data['cost_pcs'] = round($data['cost']/$sum_product_qty, 2);
             $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
             
             $insert_id = \DB::table('order_transport')->insertGetId($data); 
         }elseif($type == 'overhead'){
-            $data['order_id'] = $order_id;
+//            $data['order_id'] = $order_id;
 //            $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
 //            $data['max'] = str_replace(',', '', $data['max']);
 //            $data['min'] = str_replace(',', '', $data['min']);
 //            $data['avg'] = str_replace(',', '', $data['avg']);
 //            $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
             
-            $insert_id = \DB::table('order_overhead')->insertGetId($data); 
+            $insert_id = \DB::table('order_overhead')->where('order_id', $order_id)->update($data); 
         }
         
         if($insert_id){   

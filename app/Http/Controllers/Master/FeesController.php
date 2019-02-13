@@ -60,7 +60,7 @@ class FeesController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
-        
+        $data['monthly_revenue'] = str_replace(',', '', $data['monthly_revenue']);
         $insert_id = \DB::table('management_fees')->insertGetId($data);
         
         if($insert_id){

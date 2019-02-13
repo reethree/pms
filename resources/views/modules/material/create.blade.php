@@ -19,6 +19,12 @@
                       </div>
                     </div>
                     <div class="form-group">
+                      <label for="name" class="col-sm-3 control-label">Brand</label>
+                      <div class="col-sm-8">
+                          <input type="text" name="brand" class="form-control" id="brand" placeholder="Brand" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <label for="type" class="col-sm-3 control-label">Type</label>
                       <div class="col-sm-6">
                           <select class="form-control" name="type" id="type" style="width: 100%;" required>
@@ -41,7 +47,7 @@
                             </select>
                         </div>
                       <div class="col-sm-5">
-                            <input type="text" name="price" class="form-control" id="price" placeholder="Price" required>
+                            <input type="text" name="price" class="form-control money_usd" id="price" placeholder="Price" required>
                       </div>
                     </div>
                     <div class="form-group">
@@ -49,7 +55,7 @@
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <span class="input-group-addon">IDR</span>
-                                <input type="number" name="rate" class="form-control" placeholder="Rate USD to IDR">
+                                <input type="text" name="rate" class="form-control money" placeholder="Rate USD to IDR">
                             </div>
                         </div>
                     </div>

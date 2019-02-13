@@ -131,7 +131,7 @@
                                 <div class="col-sm-5">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" class="form-control" id="usd_rate" required>
+                                    <input type="text" class="form-control money" id="usd_rate" required>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="price" id="material_buffer" class="form-control" placeholder="Material Price" required>
+                                    <input type="text" name="price" id="material_buffer" class="form-control money" placeholder="Material Price" required>
                                     <span class="input-group-addon">per KG</span>
                                     </div>
                                 </div>

@@ -71,7 +71,7 @@ class ElectricityController extends Controller
     public function store(Request $request)
     {
         $data = $request->except(['_token']);        
-        
+        $data['monthly_bill'] = str_replace(',','',$data['monthly_bill']);
         $insert_id = \DB::table('electricity')->insertGetId($data);
         
         if($insert_id){
@@ -129,7 +129,7 @@ class ElectricityController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except(['_token']);        
-        
+        $data['monthly_bill'] = str_replace(',','',$data['monthly_bill']);
         $update = \DB::table('electricity')->where('id',$id)->update($data);
         
         if($update){
@@ -162,6 +162,7 @@ class ElectricityController extends Controller
         $data['max_bill'] = number_format(\DB::table('electricity')->where('year', $year)->max('monthly_bill'));
         $data['min_bill'] = number_format(\DB::table('electricity')->where('year', $year)->min('monthly_bill'));
         $data['avg_bill'] = number_format(\DB::table('electricity')->where('year', $year)->avg('monthly_bill'));
+        $data['total_machine'] = \DB::table('machines')->count();
         
         return json_encode($data);
     }

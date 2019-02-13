@@ -23,7 +23,7 @@
                       <div class="col-sm-8">
                           <div class="input-group">
                             <span class="input-group-addon">IDR</span>
-                            <input type="number" name="weekly_wages" class="form-control" id="weekly_wages" placeholder="Weekly Wages" required>
+                            <input type="text" name="weekly_wages" class="form-control money" id="weekly_wages" placeholder="Weekly Wages" required>
                           </div>
                       </div>
                     </div>

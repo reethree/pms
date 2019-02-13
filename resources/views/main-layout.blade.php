@@ -40,7 +40,7 @@
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="{{ asset("bower_components/bootstrap/dist/js/bootstrap.min.js") }}"></script>
-
+    <script src="{{ asset("js/plugins/jquery.maskMoney.min.js") }}"></script>
     <script>
         $(function () {
             $.ajaxSetup({
@@ -133,6 +133,8 @@
 
 <script>
     $(".pagination").addClass("pagination-sm no-margin pull-right");
+    $(".money").maskMoney({allowNegative: false, thousands:',', decimal:'.', affixesStay: false,precision: 0});
+    $(".money_usd").maskMoney({allowNegative: false, thousands:',', decimal:'.', affixesStay: false,precision: 2});
 </script>
 
 @yield('custom_js')

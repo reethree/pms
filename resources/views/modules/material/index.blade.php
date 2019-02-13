@@ -25,6 +25,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Brand</th>
                         <th>Type</th>
                         <th>Price</th>
                         <th>Status</th>
@@ -53,6 +54,7 @@
         columns: [
             {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},
+            {data: 'brand', name: 'brand'},
             {data: 'type', name: 'type'},
             {data: 'price', name: 'price'},
             {data: 'status', name: 'status'},

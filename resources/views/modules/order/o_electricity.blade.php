@@ -104,7 +104,13 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Total Machine</label>
                                 <div class="col-sm-8">
-                                    <input type="number" name="total_machine" class="form-control" placeholder="Total Machine" required>
+                                    <input type="number" name="total_machine" id="total_machine" class="form-control" placeholder="Total Machine" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="qty_shift" class="col-sm-3 control-label">Days Production</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control qty_prod" name="qty_actual" placeholder="Production Quantity" required readonly>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -118,7 +124,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="cost_amount" class="form-control" id="cost_amount" placeholder="Cost" required>
+                                    <input type="text" name="cost_amount" class="form-control money" id="cost_amount_electricity" placeholder="Cost" required>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +133,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control" id="amount_electricity" placeholder="Buffer" required>
+                                    <input type="text" name="amount" class="form-control money" id="amount_electricity" placeholder="Buffer" required>
                                     </div>
                                 </div>
                             </div>

@@ -114,7 +114,13 @@
                             <div class="form-group">
                                 <label for="qty_shift" class="col-sm-3 control-label">Days Production</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="qty_actual" id="qty_prod" placeholder="Production Quantity" required readonly>
+                                    <input type="text" class="form-control qty_prod" name="qty_actual" placeholder="Production Quantity" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="qty_shift" class="col-sm-3 control-label">Days Needed</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="qty" class="form-control" id="qty_shift" placeholder="Quantity" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -122,14 +128,8 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="number" name="amount" class="form-control" id="amount_per_shift" placeholder="Amount Head /Day" required>
+                                    <input type="text" name="amount" class="form-control money" id="amount_per_shift" placeholder="Amount Head /Day" required>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="qty_shift" class="col-sm-3 control-label">Days Needed</label>
-                                <div class="col-sm-8">
-                                    <input type="text" name="qty" class="form-control" id="qty_shift" placeholder="Quantity" required>
                                 </div>
                             </div>
                         </div>
