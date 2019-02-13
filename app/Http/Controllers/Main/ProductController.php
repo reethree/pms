@@ -273,6 +273,8 @@ class ProductController extends Controller
         }elseif($type == 'machine'){
             $data['amount'] = str_replace(',', '', $data['amount']);
             $data['depr_amount'] = $data['cost']/$data['depreciation'];
+            $data['depr_month'] = round($data['depr_amount']/12,2);
+            $data['depr_sec'] = round($data['depr_month']/2592000,2);
             $insert_id = \DB::table('product_machine')->insertGetId($data);
         }elseif($type == 'material'){
             $data['price'] = str_replace(',', '', $data['price']);
