@@ -16,6 +16,11 @@ class MainController extends Controller
         $data['page_title'] = "Welcome to Dashboard";
         $data['page_description'] = "This is Admin Page PMS PT. Dinamika Polimerindo";
         
+        $data['machine'] = \DB::table('machines')->count();
+        $data['mould'] = \DB::table('mould')->count();
+        $data['material'] = \DB::table('materials')->count();
+        $data['product'] = \DB::table('products')->count();
+        
         return view('welcome', $data);
     }
     
