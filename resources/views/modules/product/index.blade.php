@@ -52,6 +52,7 @@
 @section('custom_js')
 <script>
     $('#product-table').DataTable({
+        pageLength: 100,
         processing: true,
         serverSide: true,
         ajax: '{{route("getProductTable")}}',

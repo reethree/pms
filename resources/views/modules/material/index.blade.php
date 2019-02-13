@@ -48,6 +48,7 @@
 @section('custom_js')
 <script>
     $('#material-table').DataTable({
+        pageLength: 100,
         processing: true,
         serverSide: true,
         ajax: '{{route("getMaterialTable")}}',

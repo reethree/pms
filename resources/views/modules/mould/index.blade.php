@@ -50,6 +50,7 @@
 @section('custom_js')
 <script>
     $('#mould-table').DataTable({
+        pageLength: 100,
         processing: true,
         serverSide: true,
         ajax: '{{route("getMouldTable")}}',

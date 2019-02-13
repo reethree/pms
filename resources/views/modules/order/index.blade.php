@@ -45,6 +45,7 @@
 @section('custom_js')
 <script>
     $('#order-table').DataTable({
+        pageLength: 100,
         processing: true,
         serverSide: true,
         ajax: '{{route("getOrderTable")}}',
