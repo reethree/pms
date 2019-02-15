@@ -133,7 +133,8 @@ class MaterialController extends Controller
     {
         $date_price = $request->date_price;
         $data = $request->except(['_token','date_price']);         
-        
+        $data['price'] = str_replace(',', '', $data['price']);
+        $data['rate'] = str_replace(',', '', $data['rate']);
         $insert_id = \DB::table('materials')->insertGetId($data);
         
         if($insert_id){
@@ -142,8 +143,8 @@ class MaterialController extends Controller
             $data_price['currency'] = $data['currency'];
 //            $data_price['price'] = $data['price'];
 //            $data_price['rate'] = $data['rate'];
-            $data['price'] = str_replace(',', '', $data['price']);
-            $data['rate'] = str_replace(',', '', $data['rate']);
+            $data_price['price'] = $data['price'];
+            $data_price['rate'] = $data['rate'];
             $data_price['date'] = $date_price;
             
             $insert_price = \DB::table('material_price')->insertGetId($data_price);
