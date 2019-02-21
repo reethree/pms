@@ -114,9 +114,11 @@ class LabourController extends Controller
                 'title' => 'Edit'
             ]
         ]; 
-        $data['weekly_wages'] = str_replace(',', '', $data['weekly_wages']);
-        $data['labour'] = \DB::table('labour')->find($id);
-
+       
+        $labour = \DB::table('labour')->find($id);
+        $labour->weekly_wages = str_replace(',', '', $labour->weekly_wages);
+        $data['labour'] = $labour;
+        
         return view('modules.labour.edit', $data);
     }
 
