@@ -111,9 +111,10 @@
     $("#electricity_year").on("change", function(){
         var year = $(this).val();
         var url = '{{route("getDataElectricityByYear")}}';
+        var order_id = '{{$order->id}}';
         $.ajax({
             type: 'GET',
-            data: {'year' : year},
+            data: {'year' : year,'order_id': order_id},
             dataType : 'json',
             url: url,
             error: function (jqXHR, textStatus, errorThrown)
@@ -128,6 +129,7 @@
                 $('#avg_bill,#cost_amount_electricity').val(json.avg_bill);
                 
                 $('#total_machine').val(json.total_machine);
+                $('.qty_prod').val(json.qty_prod);
             }
         });
     });

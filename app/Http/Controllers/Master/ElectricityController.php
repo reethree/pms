@@ -38,7 +38,21 @@ class ElectricityController extends Controller
         
         return view('modules.electricity.index', $data);
     }
-
+    
+    public function getTable()
+    {
+        $electricities = \DB::table('electricity')->select('*');
+        return \Datatables::of($electricities)
+                ->addColumn('action', function ($electricity) {
+                    return '<a href="'.route('edit-customer', $electricity->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-customer', $electricity->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->editColumn('status', function ($electricity) {
+                    return ucfirst($electricity->status);
+                })
+                ->make(true);
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -158,11 +172,21 @@ class ElectricityController extends Controller
     public function getDataElectricityByYear(Request $request)
     {
         $year = $request->year;
+        $order_id = $request->order_id;
         
         $data['max_bill'] = number_format(\DB::table('electricity')->where('year', $year)->max('monthly_bill'));
         $data['min_bill'] = number_format(\DB::table('electricity')->where('year', $year)->min('monthly_bill'));
         $data['avg_bill'] = number_format(\DB::table('electricity')->where('year', $year)->avg('monthly_bill'));
         $data['total_machine'] = \DB::table('machines')->count();
+        
+        $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
+        $sum_daily_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('daily_qty');
+        
+        if($sum_daily_qty){
+            $data['qty_prod'] = round($sum_product_qty/$sum_daily_qty);
+        }else{
+            $data['qty_prod'] = 0;
+        }
         
         return json_encode($data);
     }
