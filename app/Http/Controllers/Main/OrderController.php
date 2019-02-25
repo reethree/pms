@@ -401,7 +401,7 @@ class OrderController extends Controller
 //            $data['avg'] = str_replace(',', '', $data['avg']);
 //            $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
 //            return $data;
-            $insert_id = \DB::table('order_overhead')->updateOrInsert(array('order_id',$order_id),$data); 
+            $insert_id = \DB::table('order_overhead')->updateOrInsert(array('order_id' => $order_id),$data); 
         }
         
         if($insert_id){   
