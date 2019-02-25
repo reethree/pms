@@ -69,6 +69,12 @@ class OrderController extends Controller
                 ->get();
         
         foreach ($order_product as $op):
+            if($op->quantity && $op->daily_qty){
+                $op->qty_prod = round($op->quantity/$op->daily_qty);
+            }else{
+                $op->qty_prod = 0;
+            }
+            
             $data_machines = \DB::table('product_machine')
                 ->select('product_machine.*','machines.name as machine_name')
                 ->leftjoin('machines', 'product_machine.machine_id','=','machines.id')
@@ -90,7 +96,7 @@ class OrderController extends Controller
         $order_packaging = \DB::table('order_packaging')->where('order_id', $id)->get();
         $order_transport = \DB::table('order_transport')->where('order_id', $id)->get();
         $order_overhead = \DB::table('order_overhead')->where('order_id', $id)->get();
-
+        
         $data['order'] = $order;     
         $data['order_product'] = $order_product;
         $data['order_labour'] = $order_labour;
@@ -443,6 +449,12 @@ class OrderController extends Controller
                 ->get();
         
         foreach ($order_product as $op):
+            if($op->quantity && $op->daily_qty){
+                $op->qty_prod = round($op->quantity/$op->daily_qty);
+            }else{
+                $op->qty_prod = 0;
+            }
+            
             $data_machines = \DB::table('product_machine')
                 ->select('product_machine.*','machines.name as machine_name')
                 ->leftjoin('machines', 'product_machine.machine_id','=','machines.id')

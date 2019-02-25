@@ -122,6 +122,17 @@
                                 </table>
                             </div>
                         @endif 
+                        
+                        <div class="column">
+                            <table style="border: 1px solid #CCC;margin-bottom: 5px;">
+                                <tr>
+                                    <td style="padding: 15px;text-align: center;border-right: 1px solid #CCC;width: 50%;">Lama Produksi</td>
+                                    <td style="padding: 15px;text-align: center;">
+                                        <p><b>{{$o_prod->qty_prod}} Hari</b></p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
 
                 @endforeach
@@ -259,7 +270,7 @@
                         @foreach($order_labour as $o_lab)
                             <tr>
                               <td style="text-align: center;">{{$i}}</td>
-                              <td>Labour</td>
+                              <td>Labour ({{$o_lab->qty.' Hari'}})</td>
                               <td style="text-align: center;">{{$o_lab->labour_cost}}</td>  
                               <td style="text-align: center;">{{$o_lab->labour_pcs}}</td> 
                             </tr>
@@ -268,7 +279,7 @@
                         @foreach($order_electricity as $o_ele)
                             <tr>
                               <td style="text-align: center;">{{$i}}</td>
-                              <td>Electricity</td>
+                              <td>Electricity ({{$o_lab->days_needed.' Hari'}})</td>
                               <td style="text-align: center;">{{$o_ele->pcs_cost}}</td>  
                               <td style="text-align: center;">{{$o_ele->pcs}}</td> 
                             </tr>

@@ -50,6 +50,7 @@
                             Cavity : {{$o_prod->cavity}}<br />
                             Cycle Time : {{$o_prod->cycle_time}}<br />
                             Time Efficiency : {{$o_prod->efficiency.'%'}}<br />
+                            Production Needed : {{$o_prod->qty_prod.' days'}}
 <!--                            {{'Product Name : '.$o_prod->name}}<br />
                             {{'Weight Prediction : '.$o_prod->weight_pre.' Gram'}}<br />
                             {{'Weight Buffer : '.$o_prod->weight_buff.' Gram'}}<br />
@@ -109,7 +110,7 @@
             @foreach($order_labour as $o_lab)
                 <tr>
                   <td>{{$i}}</td>
-                  <td>Labour</td>
+                  <td>Labour ({{$o_lab->qty}} days)</td>
                   @if(\Auth::user()->role == 'owner')
                   <td>{{$o_lab->labour_cost}}</td>  
                   @endif
@@ -120,7 +121,7 @@
             @foreach($order_electricity as $o_ele)
                 <tr>
                   <td>{{$i}}</td>
-                  <td>Electricity</td>
+                  <td>Electricity ({{$o_ele->days_needed}} days)</td>
                   @if(\Auth::user()->role == 'owner')
                   <td>{{$o_ele->pcs_cost}}</td>  
                   @endif
