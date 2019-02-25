@@ -394,14 +394,14 @@ class OrderController extends Controller
             
             $insert_id = \DB::table('order_transport')->insertGetId($data); 
         }elseif($type == 'overhead'){
-            $data['order_id'] = $order_id;
+//            $data['order_id'] = $order_id;
 //            $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
 //            $data['max'] = str_replace(',', '', $data['max']);
 //            $data['min'] = str_replace(',', '', $data['min']);
 //            $data['avg'] = str_replace(',', '', $data['avg']);
 //            $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
-            
-            $insert_id = \DB::table('order_overhead')->updateOrInsert($data); 
+//            return $data;
+            $insert_id = \DB::table('order_overhead')->updateOrInsert(array('order_id',$order_id),$data); 
         }
         
         if($insert_id){   
