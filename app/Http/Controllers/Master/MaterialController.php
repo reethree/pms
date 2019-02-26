@@ -280,7 +280,9 @@ class MaterialController extends Controller
         $date_price = $request->date_price;
         $data = $request->except(['_token','date_price']);        
         $data['price'] = str_replace(',', '', $data['price']);
-        $data['rate'] = str_replace(',', '', $data['rate']);
+        if($data['rate']){
+            $data['rate'] = str_replace(',', '', $data['rate']);
+        }
         $update = \DB::table('materials')->where('id', $id)->update($data);
         
         if($update){

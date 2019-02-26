@@ -279,7 +279,7 @@
                         @foreach($order_electricity as $o_ele)
                             <tr>
                               <td style="text-align: center;">{{$i}}</td>
-                              <td>Electricity ({{$o_lab->days_needed.' Hari'}})</td>
+                              <td>Electricity ({{$o_ele->days_needed.' Hari'}})</td>
                               <td style="text-align: center;">{{$o_ele->pcs_cost}}</td>  
                               <td style="text-align: center;">{{$o_ele->pcs}}</td> 
                             </tr>
