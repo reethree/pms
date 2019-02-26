@@ -351,7 +351,11 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = \DB::table('materials')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Material has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
     
     public function destroyGroupDetail($detail_id)
@@ -433,5 +437,14 @@ class MaterialController extends Controller
 //        return back()->with('success', 'Material ID not found.'); 
 //        return json_encode(array('success' => false, 'msg' => 'Material ID not found.'));
         
+    }
+    
+    public function destroyGroup($id)
+    {
+        $delete = \DB::table('group_category')->where('id',$id)->delete();
+        if($delete){
+            return back()->with('success', 'Material Group has been deleted.');
+        }
+        return back()->with('error', 'Oooppss, something wrong.');
     }
 }
