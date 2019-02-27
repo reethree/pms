@@ -253,7 +253,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \DB::table('products')->where('id', $id)->delete();
+        \DB::table('product_mould')->where('product_id', $id)->delete();
+        \DB::table('product_machine')->where('product_id', $id)->delete();
+        \DB::table('product_material')->where('product_id', $id)->delete();
+        
+        return back()->with('success', 'Product has been deleted.');  
     }
     
     public function updateDetail(Request $request, $product_id, $type)

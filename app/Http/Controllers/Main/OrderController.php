@@ -258,7 +258,15 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \DB::table('orders')->where('id', $id)->delete();
+        \DB::table('order_product')->where('order_id', $id)->delete();
+        \DB::table('order_labour')->where('order_id', $id)->delete();
+        \DB::table('order_electricity')->where('order_id', $id)->delete();
+        \DB::table('order_packaging')->where('order_id', $id)->delete();
+        \DB::table('order_transport')->where('order_id', $id)->delete();
+        \DB::table('order_overhead')->where('order_id', $id)->delete();     
+        
+        return back()->with('success', 'Order has been deleted.');    
     }
 
     public function updateDetail(Request $request, $order_id, $type)
