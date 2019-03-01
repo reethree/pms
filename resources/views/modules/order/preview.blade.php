@@ -319,7 +319,7 @@
     <div class="row" style="display:block;">
         <hr />
         <div class="col-xs-6" style="width: 48%;">
-            <p class="lead"><b>TOTAL PROFIT</b></p>
+            <p class="lead"><b>NET MARGIN</b></p>
             <?php
             if(isset($o_over->amount)):
                 $cost_pcs = $p_total_cost+$total_cost+$o_over->amount;
@@ -334,7 +334,7 @@
         <div class="table-responsive">
           <table class="table">
             <tr style="font-size: 18px;">
-              <td>Profit per PCS:</td>
+              <td>Net Margin per PCS:</td>
               <td style="text-align: right;"><b>{{number_format($profit_pcs,2)}}</b></td>
             </tr>
             <tr>
@@ -357,9 +357,8 @@
     <!-- this row will not appear when printing -->
     <div class="row no-print">
       <div class="col-xs-12">
-<!--        <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-        </button>-->
+        <a href="{{route('download-pdf-order', $order->id)}}" class="btn btn-default"><i class="fa fa-print"></i> Download PDF</a>
+        <!--<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>-->
         <a href="{{route('send-email-order', $order->id)}}" onclick="return confirm('Are you sure ?')" class="btn btn-primary pull-right" style="margin-right: 5px;">
           <i class="fa fa-envelope"></i> SEND EMAIL
         </a>

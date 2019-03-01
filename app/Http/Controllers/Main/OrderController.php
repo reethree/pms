@@ -344,7 +344,7 @@ class OrderController extends Controller
             $data['machine_cost'] = round($machine_cost, 2);
             $data['material_cost'] = round($material_cost, 2);
             
-            $data['daily_qty'] = ((86400 / $data['cycle_time']) * $data['cavity']) * ($data['efficiency']/100);
+            $data['daily_qty'] = ((79200 / $data['cycle_time']) * $data['cavity']) * ($data['efficiency']/100);
 
             $insert_id = \DB::table('order_product')->insertGetId($data);
             
@@ -523,6 +523,65 @@ class OrderController extends Controller
         
 //        return back()->with('error', 'Ooopps, something wrong please try again.'); 
         
+    }
+    
+    public function downloadPdf($id)
+    {
+        $order = \DB::table('orders')->find($id);
+        
+        $order_product = \DB::table('order_product')
+                ->select('order_product.*','products.*','customer.name as customer_name')
+                ->leftjoin('products', 'order_product.product_id', '=', 'products.id')
+                ->leftjoin('customer', 'products.customer_id', '=', 'customer.id')
+                ->where('order_id', $id)
+                ->get();
+        
+        foreach ($order_product as $op):
+            if($op->quantity && $op->daily_qty){
+                $op->qty_prod = round($op->quantity/$op->daily_qty);
+            }else{
+                $op->qty_prod = 0;
+            }
+            
+            $data_machines = \DB::table('product_machine')
+                ->select('product_machine.*','machines.name as machine_name')
+                ->leftjoin('machines', 'product_machine.machine_id','=','machines.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $data_moulds = \DB::table('product_mould')
+                ->select('product_mould.*','mould.name as mould_name','mould.no_of_cavity as cavity')
+                ->leftjoin('mould', 'product_mould.mould_id','=','mould.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $data_materials = \DB::table('product_material')
+                ->select('product_material.*','materials.name as material_name')
+                ->leftjoin('materials', 'product_material.material_id','=','materials.id')
+                ->where('product_id', $op->product_id)
+                ->get();
+            
+            $op->materials = $data_materials;
+            $op->machines = $data_machines;
+            $op->moulds = $data_moulds;
+        endforeach;
+        
+        $order_labour = \DB::table('order_labour')->where('order_id', $id)->get();
+        $order_electricity = \DB::table('order_electricity')->where('order_id', $id)->get();        
+        $order_packaging = \DB::table('order_packaging')->where('order_id', $id)->get();
+        $order_transport = \DB::table('order_transport')->where('order_id', $id)->get();
+        $order_overhead = \DB::table('order_overhead')->where('order_id', $id)->get();
+
+        $data['order'] = $order;     
+        $data['order_product'] = $order_product;
+        $data['order_labour'] = $order_labour;
+        $data['order_electricity'] = $order_electricity;
+        $data['order_packaging'] = $order_packaging;
+        $data['order_transport'] = $order_transport;
+        $data['order_overhead'] = $order_overhead;
+        
+        $pdf = \PDF::loadView('modules.order.pdf', $data);
+        return $pdf->download('P-PMS '.$order->number.'pdf');
     }
     
 }

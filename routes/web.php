@@ -389,6 +389,10 @@ Route::group(['middleware' => ['auth']], function(){
             'as' => 'send-email-order',
             'uses' => 'OrderController@sendEmail'
         ]);
+        Route::get('/order/download/{id}', [
+            'as' => 'download-pdf-order',
+            'uses' => 'OrderController@downloadPdf'
+        ]);
 
         // Product Routes
         Route::get('/product', [

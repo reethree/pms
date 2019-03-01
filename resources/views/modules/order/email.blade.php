@@ -126,7 +126,7 @@
                         <div class="column">
                             <table style="border: 1px solid #CCC;margin-bottom: 5px;">
                                 <tr>
-                                    <td style="padding: 15px;text-align: center;border-right: 1px solid #CCC;width: 50%;">Lama Produksi</td>
+                                    <td style="padding: 15px;text-align: center;border-right: 1px solid #CCC;width: 50%;">Estimasi Lama Produksi (22Jam X 7Hari)</td>
                                     <td style="padding: 15px;text-align: center;">
                                         <p><b>{{$o_prod->qty_prod}} Hari</b></p>
                                     </td>
@@ -407,7 +407,7 @@
                 <div class="row" style="display:block;">
                     <hr />
                     <div class="col-xs-6" style="width: 48%;">
-                        <p class="lead"><b>TOTAL PROFIT</b></p>
+                        <p class="lead"><b>NET MARGIN</b></p>
                         <?php
                             $cost_pcs = $p_total_cost+$total_cost+$o_over->amount;
                             $buffer_pcs = $p_total_price+$total_price+$o_over->amount+$o_over->profit;
@@ -417,7 +417,7 @@
                     <div class="table-responsive">
                       <table class="table">
                         <tr>
-                          <td>Profit per PCS:</td>
+                          <td>Net margin per PCS:</td>
                           <td style="text-align: right;"><b>{{number_format($profit_pcs,2)}}</b></td>
                         </tr>
                         <tr>
