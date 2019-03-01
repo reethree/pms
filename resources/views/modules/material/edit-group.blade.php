@@ -54,6 +54,7 @@
                   <th style="text-align: center;">Type</th>
                   <th style="text-align: center;">Weight(Kg)</th>
                   <th style="text-align: center;">Cost(IDR)</th>
+                  <th style="text-align: center;">Buffer(IDR)</th>
                   <!--<th style="text-align: center;">Status</th>-->
                   <th></th>
                 </tr>
@@ -64,6 +65,7 @@
                   <td>{{$mg->name}}</td>
                   <td align='center'>{{$mg->type}}</td>
                   <td>{{$mg->weight}}</td>
+                  <td>{{number_format($mg->cost)}}</td>
                   <td>{{number_format($mg->price)}}</td>
                   <!--<td align='center'>@if($mg->status == 'active')<span class="label label-success">Active</span>@else<span class="label label-danger">{{$mg->status}}</span>@endif</td>-->
                     <td align='center'>

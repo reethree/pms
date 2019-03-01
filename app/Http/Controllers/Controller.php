@@ -21,7 +21,7 @@ class Controller extends BaseController
         
         $total_cost = 0;
         foreach ($material_group as $mg):
-            $c_amount = $mg->price*$mg->weight;
+            $c_amount = $mg->cost*$mg->weight;
             $total_cost+=$c_amount;
         endforeach;
         

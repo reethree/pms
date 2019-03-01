@@ -383,7 +383,8 @@ class MaterialController extends Controller
                 'material_id' => $mg->material_id,
                 'packing' => 'Kg',
                 'qty' => $mg->weight,
-                'cost' => $mg->price
+                'cost' => $mg->cost,
+                'price' => $mg->price
             );
         endforeach;
         
@@ -399,7 +400,7 @@ class MaterialController extends Controller
     public function saveGroupMaterial(Request $request, $product_id)
     {       
         $product_material = \DB::table('product_material')->where('product_id', $product_id)->get();
-        
+//        return $product_material;
         if($request->group_id){
             // Delete Group
             \DB::table('material_group')->where('group_id', $request->group_id)->delete();
@@ -409,18 +410,19 @@ class MaterialController extends Controller
         }
         
         foreach ($product_material as $pm):
-            $material = \DB::table('materials')->find($pm->material_id);
-            $price = $material->price;
-            if($material->currency != 'IDR'){
-                $rate = $this->getCurrencyByName($material->currency);
-                $price = $material->price * $rate;
-            }
+//            $material = \DB::table('materials')->find($pm->material_id);
+//            $price = $material->price;
+//            if($material->currency != 'IDR'){
+//                $rate = $this->getCurrencyByName($material->currency);
+//                $price = $material->price * $rate;
+//            }
 
             \DB::table('material_group')->insertGetId(
                 array(
                     'group_id' => $group_id,
                     'material_id' => $pm->material_id,
-                    'price' => $price,
+                    'price' => $pm->price,
+                    'cost' => $pm->cost,
                     'currency' => 'IDR',
                     'weight' => $pm->qty
                 )
