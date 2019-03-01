@@ -33,6 +33,7 @@
                     @endif
                     <td align="center"><b>{{$ot->amount_pcs}}</b></td>
                     <td align="center">
+                        <button type="button" class="btn btn-info btn-xs edit-trans-btn" data-id="{{$ot->id}}" data-cost="{{$ot->cost}}" data-buffer="{{$ot->amount}}"><i class="fa fa-edit"></i></button>
                         <a href="{{route('delete-order-detail', array($ot->id, 'transport'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
@@ -76,6 +77,53 @@
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
                                     <input type="text" name="amount" class="form-control money" placeholder="Amount Total Transport" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="edit-transport-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Transport</h4>
+            </div>
+            <form class="form-horizontal" action="{{ route('update-order-detail', array($order->id,'transport')) }}" enctype="multipart/form-data" method="POST">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                            <input name="id" type="hidden" id="edit_trans_id">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Cost total</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="cost" id="edit_trans_cost" class="form-control money" placeholder="Cost Total Transport" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Buffer total</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="amount" id="edit_trans_amount" class="form-control money" placeholder="Amount Total Transport" required>
                                     </div>
                                 </div>
                             </div>

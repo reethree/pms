@@ -108,6 +108,15 @@
         });
     });
     
+    $(".edit-labour-btn").on("click", function(){   
+        $("#edit_labour_id").val($(this).data("id"));
+        $("#edit_labour_qty").val($(this).data("qty"));
+        $("#edit_labour_cost").val($(this).data("cost"));
+        $("#edit_labour_buffer").val($(this).data("buffer"));
+        
+        $(".edit-labour-modal").modal("show");
+    });
+    
     $("#electricity_year").on("change", function(){
         var year = $(this).val();
         var url = '{{route("getDataElectricityByYear")}}';
@@ -132,6 +141,25 @@
                 $('.qty_prod').val(json.qty_prod);
             }
         });
+    });
+    
+    $(".edit-electricity-btn").on("click", function(){
+        $("#edit_elec_id").val($(this).data("id"));
+        $("#edit_elec_total_machine").val($(this).data("machine"));
+        $("#edit_elec_days_needed").val($(this).data("qty"));
+        $("#edit_elec_qty_actual").val($(this).data("actual"));
+        $("#edit_elec_cost").val($(this).data("cost"));
+        $("#edit_elec_amount").val($(this).data("buffer"));
+        
+        $("#edit-electricity-modal").modal("show");
+    });
+    
+    $(".edit-trans-btn").on("click", function(){
+        $("#edit_trans_id").val($(this).data("id"));
+        $("#edit_trans_cost").val($(this).data("cost"));
+        $("#edit_trans_amount").val($(this).data("buffer"));
+        
+        $("#edit-transport-modal").modal("show");
     });
     
     $("#overhead_year").on("change", function(){

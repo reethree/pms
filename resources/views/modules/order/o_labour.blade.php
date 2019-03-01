@@ -37,6 +37,7 @@
                     @endif
                     <td align="center"><b>{{$ol->labour_pcs}}</b></td>
                     <td align="center">
+                        <button type="button" class="btn btn-info btn-xs edit-labour-btn" data-id="{{$ol->id}}" data-qty="{{$ol->qty}}" data-cost="{{$ol->cost_head}}" data-buffer="{{$ol->amount}}"><i class="fa fa-edit"></i></button>
                         <a href="{{route('delete-order-detail', array($ol->id, 'labour'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
@@ -120,7 +121,7 @@
                             <div class="form-group">
                                 <label for="qty_shift" class="col-sm-3 control-label">Days Needed</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="qty" class="form-control" id="qty_shift" placeholder="Quantity" required>
+                                    <input type="text" name="qty" class="form-control" id="qty_shift" placeholder="Days Needed" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -128,7 +129,60 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="amount" class="form-control money" id="amount_per_shift" placeholder="Amount Head /Day" required>
+                                    <input type="text" name="amount" class="form-control money" id="amount_per_shift" placeholder="Buffer Head /Month" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade edit-labour-modal" id="edit-labour-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Labour</h4>
+            </div>
+            <form class="form-horizontal" action="{{ route('update-order-detail', array($order->id,'labour')) }}" enctype="multipart/form-data" method="POST">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"> 
+                            <input name="id" type="hidden" id="edit_labour_id"> 
+                            <div class="form-group">
+                                <label for="qty_shift" class="col-sm-3 control-label">Days Needed</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="qty" class="form-control" id="edit_labour_qty" placeholder="Days Needed" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Cost Head /Month</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="cost_head" class="form-control money" id="edit_labour_cost" placeholder="Cost Head /Month" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount_per_shift" class="col-sm-3 control-label">Buffer /Month</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="amount" class="form-control money" id="edit_labour_buffer" placeholder="Buffer Head /Month" required>
                                     </div>
                                 </div>
                             </div>

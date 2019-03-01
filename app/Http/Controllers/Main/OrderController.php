@@ -349,32 +349,38 @@ class OrderController extends Controller
             $insert_id = \DB::table('order_product')->insertGetId($data);
             
         }elseif($type == 'labour'){
+
             $data['amount'] = str_replace(',','',$data['amount']);
-            $cost_monthly = ((str_replace(",", "", $data['cost_head'])/25)*($data['qty']*3));
-            $amount_monthly = ($data['amount']/25)*($data['qty']*3);
-            
-            $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
-            
-            $data['cost'] = str_replace(",", "", $data['cost']);
-            $data['shift'] = str_replace(",", "", $data['shift']);
             $data['cost_head'] = str_replace(",", "", $data['cost_head']);
-            $data['cost_head_day'] = str_replace(",", "", $data['cost_head_day']);
-            
-//            $data['amount_monthly'] = $amount_monthly;
-//            $data['sum_product_qty'] = $sum_product_qty;
-            
+            $cost_monthly = (($data['cost_head']/25)*($data['qty']*3));
+            $amount_monthly = ($data['amount']/25)*($data['qty']*3);
+
+            $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
+                
+            if(!isset($data['id'])){
+                $data['cost'] = str_replace(",", "", $data['cost']);
+                $data['shift'] = str_replace(",", "", $data['shift']);
+                $data['cost_head'] = str_replace(",", "", $data['cost_head']);
+                $data['cost_head_day'] = str_replace(",", "", $data['cost_head_day']);
+                $data['id'] = 0;
+            }
+
             $data['order_id'] = $order_id;
             $data['labour_cost'] = round($cost_monthly/$sum_product_qty,2);
             $data['labour_pcs'] = round($amount_monthly/$sum_product_qty,2);
-            
-            $insert_id = \DB::table('order_labour')->insertGetId($data);
+
+            $insert_id = \DB::table('order_labour')->updateOrInsert(array('id' => $data['id']),$data);
             
         }elseif($type == 'electricity'){
             $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');
             $data['order_id'] = $order_id;
-            $data['max_bill'] = str_replace(',', '', $data['max_bill']);
-            $data['min_bill'] = str_replace(',', '', $data['min_bill']);
-            $data['avg_bill'] = str_replace(',', '', $data['avg_bill']);
+            
+            if(!isset($data['id'])){
+                $data['max_bill'] = str_replace(',', '', $data['max_bill']);
+                $data['min_bill'] = str_replace(',', '', $data['min_bill']);
+                $data['avg_bill'] = str_replace(',', '', $data['avg_bill']);
+                $data['id'] = 0;
+            }
             
             $data['amount'] = str_replace(',', '', $data['amount']);
             $data['cost_amount'] = str_replace(',', '', $data['cost_amount']);
@@ -385,7 +391,7 @@ class OrderController extends Controller
             $data['pcs'] = round($pcs/$sum_product_qty, 2);
             $data['pcs_cost'] = round($pcs_cost/$sum_product_qty, 2);
             
-            $insert_id = \DB::table('order_electricity')->insertGetId($data);  
+            $insert_id = \DB::table('order_electricity')->updateOrInsert(array('id' => $data['id']),$data);  
             
         }elseif($type == 'packaging'){
             $data['order_id'] = $order_id;
@@ -406,7 +412,11 @@ class OrderController extends Controller
             $data['cost_pcs'] = round($data['cost']/$sum_product_qty, 2);
             $data['amount_pcs'] = round($data['amount']/$sum_product_qty, 2);
             
-            $insert_id = \DB::table('order_transport')->insertGetId($data); 
+            if(!isset($data['id'])){
+                $data['id'] = 0;
+            }
+            
+            $insert_id = \DB::table('order_transport')->updateOrInsert(array('id' => $data['id']),$data); 
         }elseif($type == 'overhead'){
 //            $data['order_id'] = $order_id;
 //            $sum_product_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('quantity');

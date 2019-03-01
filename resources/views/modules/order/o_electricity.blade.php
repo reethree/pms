@@ -35,6 +35,7 @@
                     <td align="center"><b>{{$oe->pcs_cost}}</b></td>
                     <td align="center"><b>{{$oe->pcs}}</b></td>
                     <td align="center">
+                        <button type="button" class="btn btn-info btn-xs edit-electricity-btn" data-id="{{$oe->id}}" data-machine="{{$oe->total_machine}}" data-actual="{{$oe->qty_actual}}" data-qty="{{$oe->days_needed}}" data-cost="{{$oe->cost_amount}}" data-buffer="{{$oe->amount}}"><i class="fa fa-edit"></i></button>
                         <a href="{{route('delete-order-detail', array($oe->id, 'electricity'))}}" onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
@@ -134,6 +135,66 @@
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
                                     <input type="text" name="amount" class="form-control money" id="amount_electricity" placeholder="Buffer" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="edit-electricity-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Electricity</h4>
+            </div>
+            <form class="form-horizontal" action="{{ route('update-order-detail', array($order->id,'electricity')) }}" enctype="multipart/form-data" method="POST">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                            <input name="id" type="hidden" id="edit_elec_id">
+                            <input name="qty_actual" type="hidden" id="edit_elec_qty_actual">                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Total Machine</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="total_machine" id="edit_elec_total_machine" class="form-control" placeholder="Total Machine" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Days Needed</label>
+                                <div class="col-sm-8">
+                                    <input type="number" name="days_needed" class="form-control" id="edit_elec_days_needed" placeholder="Days Needed" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Cost per Month</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="cost_amount" class="form-control money" id="edit_elec_cost" placeholder="Cost" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Buffer per Month</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">IDR</span>
+                                    <input type="text" name="amount" class="form-control money" id="edit_elec_amount" placeholder="Buffer" required>
                                     </div>
                                 </div>
                             </div>
