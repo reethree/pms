@@ -25,7 +25,7 @@ Route::group(['middleware' => ['guest'], 'namespace' => 'Auth'], function(){
 
 });
 
-Route::group(['middleware' => ['guest']], function(){
+//Route::group(['middleware' => ['guest']], function(){
     // Contact Form Routes
     Route::get('/contact', [
         'as' => 'contact',
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['guest']], function(){
         'as' => 'contact',
         'uses' => 'MainController@postContact'
     ]);
-});
+//});
 
 Route::group(['middleware' => ['auth']], function(){
 
