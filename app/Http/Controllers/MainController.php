@@ -52,5 +52,26 @@ class MainController extends Controller
         
         return back()->with('error', 'Oopps, something wrong.');
     }
+    
+    public function contact()
+    {
+        return view('contact');
+    }
+    
+    public function postContact(Request $request)
+    {
+        $data = $request->except(['_token']);        
+        
+        $data['target_harga'] = str_replace(',', '', $data['target_harga']);
+        
+        $insert_id = \DB::table('contact')->insertGetId($data);
+        
+        if($insert_id){
+            
+            return back()->with('success', 'Contact Customer has been added.');
+        }
+        
+        return back()->withInput()->with('error', 'Oopps, something wrong. Please try again.');
+    }
 
 }

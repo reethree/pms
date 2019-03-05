@@ -25,6 +25,18 @@ Route::group(['middleware' => ['guest'], 'namespace' => 'Auth'], function(){
 
 });
 
+Route::group(['middleware' => ['guest']], function(){
+    // Contact Form Routes
+    Route::get('/contact', [
+        'as' => 'contact',
+        'uses' => 'MainController@contact'
+    ]);
+    Route::post('/contact', [
+        'as' => 'contact',
+        'uses' => 'MainController@postContact'
+    ]);
+});
+
 Route::group(['middleware' => ['auth']], function(){
 
     // Dashboard Routes
