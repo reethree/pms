@@ -31,7 +31,7 @@
 <body class="hold-transition login-page" style="background: #f2f2f2;">
     <div class="login-box" style="width: 60%;margin: 30px auto;">
   <div class="login-logo">
-    <a href="#"><b>NEW CUSTOMER ENQUIRY FORM</b></a>
+    <a href="#">New Inquiry Customer Enquiry Form <b>(NICE Form)</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body" style="color: #000;border: 1px solid #aeaeae;">

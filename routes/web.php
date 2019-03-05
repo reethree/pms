@@ -31,6 +31,10 @@ Route::group(['middleware' => ['guest'], 'namespace' => 'Auth'], function(){
         'as' => 'contact',
         'uses' => 'MainController@contact'
     ]);
+    Route::get('/contact/edit/{id}', [
+        'as' => 'contact-edit',
+        'uses' => 'MainController@editContact'
+    ]);
     Route::post('/contact', [
         'as' => 'contact',
         'uses' => 'MainController@postContact'

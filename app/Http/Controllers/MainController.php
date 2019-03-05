@@ -63,15 +63,25 @@ class MainController extends Controller
         $data = $request->except(['_token']);        
         
         $data['target_harga'] = str_replace(',', '', $data['target_harga']);
-        
+
         $insert_id = \DB::table('contact')->insertGetId($data);
-        
+
         if($insert_id){
+            $data['id'] = $insert_id;
+            \Mail::send('contact_email', $data, function($message) {
+                $message->from('ppms@polimerindo.com', 'P-PMS');
+                $message->to('nice@polimerindo.com','Polimerindo')->subject('NICE Form');
+            });
             
             return back()->with('success', 'Contact Customer has been added.');
         }
         
         return back()->withInput()->with('error', 'Oopps, something wrong. Please try again.');
+    }
+    
+    public function editContact($id)
+    {
+        return view('edit-contact');
     }
 
 }
