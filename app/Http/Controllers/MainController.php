@@ -81,7 +81,25 @@ class MainController extends Controller
     
     public function editContact($id)
     {
-        return view('edit-contact');
+        $contact = \DB::table('contact')->find($id);
+        
+        return view('edit-contact',array('contact' => $contact));
+    }
+    
+    public function updateContact(Request $request, $id)
+    {
+        $data = $request->except(['_token']); 
+        
+        $data['target_harga'] = str_replace(',', '', $data['target_harga']);
+
+        $update = \DB::table('contact')->where('id', $id)->update($data);
+
+        if($update){
+            
+            return back()->with('success', 'Contact Customer has been updated.');
+        }
+        
+        return back()->withInput()->with('error', 'Oopps, something wrong. Please try again.');
     }
 
 }
