@@ -53,6 +53,31 @@ class MainController extends Controller
         return back()->with('error', 'Oopps, something wrong.');
     }
     
+    public function indexNice()
+    {
+        $data['page_title'] = "NICE Data";
+        $data['page_description'] = "";
+        $data['breadcrumbs'] = [
+            [
+                'action' => '',
+                'title' => 'NICE Data'
+            ]
+        ]; 
+        
+        return view('modules.nice.index', $data);
+    }
+    
+    public function getTableNice()
+    {
+        $contacts = \DB::table('contact')->select('*');
+        return \Datatables::of($contacts)
+                ->addColumn('action', function ($contact) {
+                    return '<a href="'.route('edit-customer', $contact->id).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>'
+                    . '&nbsp;<a href="'.route('delete-customer', $contact->id).'" onclick="if(!confirm(\'Are you sure want to delete?\')){return false;}" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i></a>';
+                })
+                ->make(true);
+    }
+    
     public function contact()
     {
         return view('contact');

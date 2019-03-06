@@ -53,6 +53,16 @@ Route::group(['middleware' => ['auth']], function(){
         'uses' => 'MainController@index'
     ]);
     
+    // Nice Routes
+    Route::get('/nice', [
+        'as' => 'index-nice',
+        'uses' => 'MainController@indexNice'
+    ]);
+    Route::get('/nice/get', [
+        'as' => 'getNiceTable',
+        'uses' => 'MainController@getTableNice'
+    ]);
+    
     // Currency Routes
     Route::get('/currency', [
         'as' => 'index-currency',

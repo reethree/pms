@@ -62,6 +62,9 @@
             <!--<li><a href="#"><i class="fa fa-money-check-alt"></i> Price Calculation</a></li>-->
           </ul>
         </li>
+        <li>
+            <a href="{{route('index-nice')}}"><i class="fa fa-book"></i> <span>Nice</span></a>
+        </li>
         @if(\Auth::user()->role == 'owner')
         <li>
             <a href="{{route('index-users')}}"><i class="fa fa-user-lock"></i> <span>Users Management</span></a>
