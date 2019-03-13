@@ -277,7 +277,11 @@ class ProductController extends Controller
             $insert_id = \DB::table('product_mould')->insertGetId($data);
         }elseif($type == 'machine'){
             $data['amount'] = str_replace(',', '', $data['amount']);
-            $data['depr_amount'] = $data['cost']/$data['depreciation'];
+            if($data['depreciation'] > 0){
+                $data['depr_amount'] = $data['cost']/$data['depreciation'];    
+            }else{
+                $data['depr_amount'] = 0;
+            } 
             $data['depr_month'] = round($data['depr_amount']/12,2);
             $data['depr_sec'] = round($data['depr_month']/2592000,2);
             $insert_id = \DB::table('product_machine')->insertGetId($data);
