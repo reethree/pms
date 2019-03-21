@@ -581,7 +581,7 @@ class OrderController extends Controller
         $data['order_overhead'] = $order_overhead;
         
         $pdf = \PDF::loadView('modules.order.pdf', $data);
-        return $pdf->download('P-PMS '.$order->number.'pdf');
+        return $pdf->download('P-PMS '.$order->number.'.pdf');
     }
     
 }
