@@ -90,7 +90,7 @@
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                     <span class="input-group-addon">IDR</span>
-                                    <input type="text" name="cost" class="form-control" id="machine_cost" placeholder="Machine Cost" required readonly>
+                                    <input type="text" name="cost" class="form-control" id="machine_cost" placeholder="Machine Cost" required>
                                     </div>
                                 </div>
                             </div>
