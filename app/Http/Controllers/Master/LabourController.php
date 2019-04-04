@@ -187,7 +187,7 @@ class LabourController extends Controller
             $data['cost_head_day'] = number_format(round($head/25));
             // Qty Prod
             if($sum_daily_qty){
-                $data['qty_prod'] = round($sum_product_qty/$sum_daily_qty);
+                $data['qty_prod'] = ceil($sum_product_qty/$sum_daily_qty);
             }else{
                 $data['qty_prod'] = 0;
             }
