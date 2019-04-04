@@ -183,7 +183,7 @@ class ElectricityController extends Controller
         $sum_daily_qty = \DB::table('order_product')->where('order_id', $order_id)->sum('daily_qty');
         
         if($sum_daily_qty){
-            $data['qty_prod'] = round($sum_product_qty/$sum_daily_qty);
+            $data['qty_prod'] = ceil($sum_product_qty/$sum_daily_qty);
         }else{
             $data['qty_prod'] = 0;
         }
