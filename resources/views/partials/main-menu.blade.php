@@ -59,7 +59,7 @@
           <ul class="treeview-menu">
             <li><a href="{{route('index-product')}}"><i class="fa fa-cube"></i> Product</a></li>
             <li><a href="{{route('index-order')}}"><i class="fa fa-clipboard-list"></i> Order</a></li>
-            <!--<li><a href="#"><i class="fa fa-money-check-alt"></i> Price Calculation</a></li>-->
+            <li><a href="{{route('index-calculation')}}"><i class="fa fa-money-check-alt"></i> Quick Calculation</a></li>
           </ul>
         </li>
         <li>

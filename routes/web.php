@@ -466,8 +466,42 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/calculation', [
             'as' => 'index-calculation',
             'uses' => 'CalculationController@index'
-        ]);        
+        ]);  
         
+        Route::get('/calculation/get', [
+            'as' => 'getDataCalculation',
+            'uses' => 'CalculationController@getDataCalculation'
+        ]);  
+        Route::get('/calculation/create', [
+            'as' => 'createDataCalculation',
+            'uses' => 'CalculationController@createDataCalculation'
+        ]);  
+        Route::get('/calculation/update', [
+            'as' => 'updateDataCalculation',
+            'uses' => 'CalculationController@updateDataCalculation'
+        ]);  
+        Route::get('/calculation/delete', [
+            'as' => 'deleteDataCalculation',
+            'uses' => 'CalculationController@deleteDataCalculation'
+        ]);  
+        
+        Route::get('/calculation/view/{id}', [
+            'as' => 'viewCalculation',
+            'uses' => 'CalculationController@viewCalculation'
+        ]);  
+        Route::post('/calculation/update/detail/{id}', [
+            'as' => 'updateDetailCalculation',
+            'uses' => 'CalculationController@updateDetailCalculation'
+        ]);
+        
+        Route::get('/calculation/preview/send-email/{id}', [
+            'as' => 'send-email-calc',
+            'uses' => 'CalculationController@sendEmail'
+        ]);
+        Route::get('/calculation/download/{id}', [
+            'as' => 'download-pdf-calc',
+            'uses' => 'CalculationController@downloadPdf'
+        ]);
     });
 
 });
